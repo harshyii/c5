@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shop All Products | CLOTH X CLUB</title>
+
+  <meta
+    name="description"
+    content="Shop CLOTH X CLUB's collection of oversized tees, shirts, bottoms and streetwear essentials."
+  >
+
+  <meta name="theme-color" content="#111111">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+<body>
+
+
+  <!-- =========================
+       ANNOUNCEMENT BAR
+  ========================== -->
+
+  <div class="announcement-bar">
+    <p>FREE SHIPPING ON ORDERS ABOVE ₹1,499</p>
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="site-header" id="site-header">
+
+    <div class="header-container">
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+
+      <!-- Logo -->
+      <a href="index.html" class="brand-logo">
+        CLOTH<span>X</span>CLUB
+      </a>
+
+
+      <!-- Navigation -->
+      <nav class="main-nav" id="main-nav">
+
+        <a href="index.html" class="nav-link">Home</a>
+
+        <a href="shop.html" class="nav-link active">Shop</a>
+
+        <a href="shop.html?category=T-Shirts" class="nav-link">
+          T-Shirts
+        </a>
+
+        <a href="shop.html?category=Shirts" class="nav-link">
+          Shirts
+        </a>
+
+        <a href="shop.html?category=Pants" class="nav-link">
+          Bottoms
+        </a>
+
+        <a href="shop.html?category=Accessories" class="nav-link">
+          Accessories
+        </a>
+
+        <a href="blog.html" class="nav-link">
+          Style Journal
+        </a>
+
+      </nav>
+
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+        <button
+          class="icon-btn"
+          id="search-toggle"
+          aria-label="Search products"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <a
+          href="wishlist.html"
+          class="icon-btn"
+          aria-label="Wishlist"
+        >
+          <i class="fa-regular fa-heart"></i>
+        </a>
+
+        <button
+          class="icon-btn cart-toggle"
+          data-cart-open
+          aria-label="Open shopping cart"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Search Panel -->
+    <div class="search-panel" id="search-panel">
+
+      <form action="shop.html" method="GET" class="search-form">
+
+        <input
+          type="search"
+          name="search"
+          id="site-search"
+          placeholder="Search products..."
+          aria-label="Search products"
+        >
+
+        <button type="submit" aria-label="Submit search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+
+  <!-- =========================
+       SHOP PAGE
+  ========================== -->
+
+  <main class="shop-page">
+
+
+    <!-- =========================
+         SHOP HERO
+    ========================== -->
+
+    <section class="shop-hero">
+
+      <div class="shop-hero-content container">
+
+        <span class="section-eyebrow">CLOTH X CLUB COLLECTION</span>
+
+        <h1>THE COLLECTION.</h1>
+
+        <p>
+          Built for everyday expression.
+          Discover your next favourite fit.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SHOP CONTENT
+    ========================== -->
+
+    <section class="shop-section container">
+
+
+      <!-- Breadcrumb -->
+      <div class="shop-breadcrumb">
+
+        <a href="index.html">Home</a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <span>Shop</span>
+
+      </div>
+
+
+      <!-- Shop Header -->
+      <div class="shop-heading">
+
+        <div class="shop-heading-text">
+
+          <span class="section-eyebrow">EXPLORE CLOTH X CLUB</span>
+
+          <h2>SHOP ALL</h2>
+
+        </div>
+
+        <p class="shop-description">
+          Find the pieces that define your style.
+        </p>
+
+      </div>
+
+
+      <!-- =========================
+           CATEGORY FILTERS
+      ========================== -->
+
+      <div class="shop-category-filters">
+
+        <button
+          class="shop-category-btn active"
+          data-shop-category="all"
+          data-category="all"
+        >
+          ALL
+        </button>
+
+        <button
+          class="shop-category-btn"
+          data-shop-category="T-Shirts"
+          data-category="T-Shirts"
+        >
+          T-SHIRTS
+        </button>
+
+        <button
+          class="shop-category-btn"
+          data-shop-category="Shirts"
+          data-category="Shirts"
+        >
+          SHIRTS
+        </button>
+
+        <button
+          class="shop-category-btn"
+          data-shop-category="Pants"
+          data-category="Pants"
+        >
+          BOTTOMS
+        </button>
+
+        <button
+          class="shop-category-btn"
+          data-shop-category="Accessories"
+          data-category="Accessories"
+        >
+          ACCESSORIES
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           SHOP TOOLBAR
+      ========================== -->
+
+      <div class="shop-toolbar">
+
+
+        <!-- Search -->
+        <div class="shop-search-wrapper">
+
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input
+            type="search"
+            data-shop-search
+            placeholder="Search the collection..."
+            aria-label="Search the collection"
+          >
+
+        </div>
+
+
+        <!-- Product Count -->
+        <div class="shop-product-count">
+
+          <span data-shop-count>0 PRODUCTS</span>
+
+        </div>
+
+
+        <!-- Sort -->
+        <div class="shop-sort-wrapper">
+
+          <label for="shop-sort">SORT BY</label>
+
+          <select
+            id="shop-sort"
+            data-shop-sort
+          >
+
+            <option value="featured">Featured</option>
+
+            <option value="newest">Newest</option>
+
+            <option value="price-low">Price: Low to High</option>
+
+            <option value="price-high">Price: High to Low</option>
+
+            <option value="discount">Best Discount</option>
+
+            <option value="name">Name: A to Z</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           PRODUCT GRID
+      ========================== -->
+
+      <div class="shop-products-wrapper">
+
+
+        <!-- Products -->
+        <div
+          class="products-grid shop-products-grid"
+          data-shop-grid
+        >
+
+          <!-- Products generated by shop.js -->
+
+        </div>
+
+
+        <!-- Empty State -->
+        <div
+          class="shop-empty-state"
+          data-shop-empty
+          hidden
+        >
+
+          <div class="shop-empty-icon">
+
+            <i class="fa-solid fa-box-open"></i>
+
+          </div>
+
+          <h3>NO PRODUCTS FOUND</h3>
+
+          <p>
+            We couldn't find anything matching your search.
+          </p>
+
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            data-shop-reset
+          >
+            CLEAR FILTERS
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- =========================
+           LOAD MORE
+      ========================== -->
+
+      <div class="shop-load-more-wrapper">
+
+        <button
+          type="button"
+          class="btn btn-outline-dark shop-load-more"
+          data-shop-load-more
+        >
+
+          LOAD MORE
+
+          <i class="fa-solid fa-arrow-down"></i>
+
+        </button>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         SHOP PROMO BANNER
+    ========================== -->
+
+    <section class="shop-promo-section">
+
+      <div class="shop-promo-content container">
+
+        <div class="shop-promo-text">
+
+          <span class="section-eyebrow">THE CLOTH X CLUB WAY</span>
+
+          <h2>LESS RULES.<br>MORE STYLE.</h2>
+
+          <p>
+            Everyday essentials made for your own expression.
+            Find your style and make it yours.
+          </p>
+
+          <a href="blog.html" class="btn btn-primary">
+
+            EXPLORE THE JOURNAL
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEWSLETTER
+    ========================== -->
+
+    <section class="newsletter-section">
+
+      <div class="newsletter-content">
+
+        <span class="section-eyebrow">JOIN CLOTH X CLUB</span>
+
+        <h2>STAY IN THE LOOP.</h2>
+
+        <p>
+          Get updates on new drops, exclusive offers
+          and everything CLOTH X CLUB.
+        </p>
+
+        <form class="newsletter-form" id="newsletter-form">
+
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="Enter your email address"
+            aria-label="Your email address"
+            required
+          >
+
+          <button type="submit">
+
+            JOIN
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </button>
+
+        </form>
+
+        <small>
+          By subscribing, you agree to receive updates from CLOTH X CLUB.
+        </small>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="site-footer">
+
+    <div class="footer-main">
+
+
+      <!-- Brand -->
+      <div class="footer-brand-column">
+
+        <a href="index.html" class="footer-logo">
+          CLOTH<span>X</span>CLUB
+        </a>
+
+        <p>
+          Everyday streetwear.<br>
+          Everyday expression.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Pinterest">
+            <i class="fa-brands fa-pinterest-p"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Shop -->
+      <div class="footer-column">
+
+        <h3>SHOP</h3>
+
+        <a href="shop.html">All Products</a>
+        <a href="shop.html?category=T-Shirts">T-Shirts</a>
+        <a href="shop.html?category=Shirts">Shirts</a>
+        <a href="shop.html?category=Pants">Pants</a>
+        <a href="shop.html?category=Accessories">Accessories</a>
+
+      </div>
+
+
+      <!-- Information -->
+      <div class="footer-column">
+
+        <h3>INFORMATION</h3>
+
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Style Journal</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQs</a>
+
+      </div>
+
+
+      <!-- Support -->
+      <div class="footer-column">
+
+        <h3>HELP & SUPPORT</h3>
+
+        <a href="shipping.html">Shipping Policy</a>
+        <a href="returns.html">Returns & Exchanges</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+
+      </div>
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="current-year">2026</span> CLOTH X CLUB.
+        ALL RIGHTS RESERVED.
+      </p>
+
+      <div class="payment-methods">
+
+        <span>UPI</span>
+        <span>COD</span>
+        <span>VISA</span>
+        <span>MASTERCARD</span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
+
+  <div class="cart-overlay" data-cart-overlay></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-label="Shopping cart">
+
+    <div class="cart-header">
+
+      <h2>YOUR BAG</h2>
+
+      <button
+        class="cart-close"
+        data-cart-close
+        aria-label="Close cart"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+
+    <!-- Cart Items -->
+    <div class="cart-body" data-cart-items>
+
+      <!-- Cart items rendered by cart.js -->
+
+    </div>
+
+
+    <!-- Cart Footer -->
+    <div class="cart-footer">
+
+
+      <!-- Free Delivery Progress -->
+      <div class="cart-delivery-progress" data-delivery-progress>
+
+        <p data-delivery-message>
+          Add more to unlock free shipping.
+        </p>
+
+        <div class="delivery-progress-track">
+
+          <div
+            class="delivery-progress-bar"
+            data-delivery-progress-bar
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Subtotal -->
+      <div class="cart-subtotal-row">
+
+        <span>Subtotal</span>
+
+        <strong data-cart-subtotal>₹0</strong>
+
+      </div>
+
+
+      <!-- Total -->
+      <div class="cart-total-row">
+
+        <span>Total</span>
+
+        <strong data-cart-total>₹0</strong>
+
+      </div>
+
+
+      <!-- Checkout -->
+      <a href="checkout.html" class="btn btn-primary cart-checkout-btn">
+
+        PROCEED TO CHECKOUT
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </a>
+
+
+      <p class="cart-note">
+        Taxes and delivery charges calculated at checkout.
+      </p>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/shop.js"></script>
+
+</body>
+</html>

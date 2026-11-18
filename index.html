@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CLOTH X CLUB | Streetwear & Everyday Fashion</title>
+
+  <meta name="description" content="Discover CLOTH X CLUB — oversized tees, streetwear essentials, cargos, denim and everyday fits. Find your style.">
+
+  <meta name="theme-color" content="#111111">
+
+  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+  <!-- =========================
+       ANNOUNCEMENT BAR
+  ========================== -->
+
+  <div class="announcement-bar">
+    <p>
+      <span>FREE SHIPPING ON ORDERS ABOVE ₹1,499</span>
+    </p>
+  </div>
+
+
+  <!-- =========================
+       HEADER / NAVIGATION
+  ========================== -->
+
+  <header class="site-header" id="site-header">
+
+    <div class="header-container">
+
+      <!-- Mobile Menu Button -->
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="brand-logo">
+        CLOTH<span>X</span>CLUB
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" id="main-nav">
+
+        <a href="index.html" class="nav-link active">Home</a>
+
+        <a href="shop.html" class="nav-link">Shop</a>
+
+        <a href="shop.html?category=T-Shirts" class="nav-link">T-Shirts</a>
+
+        <a href="shop.html?category=Pants" class="nav-link">Bottoms</a>
+
+        <a href="shop.html?category=Accessories" class="nav-link">Accessories</a>
+
+        <a href="blog.html" class="nav-link">Style Journal</a>
+
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+        <!-- Search -->
+        <button class="icon-btn" id="search-toggle" aria-label="Search products">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="wishlist.html" class="icon-btn wishlist-link" aria-label="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+
+        <!-- Cart -->
+        <button class="icon-btn cart-toggle" data-cart-open aria-label="Open shopping cart">
+
+          <i class="fa-solid fa-bag-shopping"></i>
+
+          <span class="cart-count" data-cart-count>0</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-panel" id="search-panel">
+
+      <form action="shop.html" method="GET" class="search-form">
+
+        <input
+          type="search"
+          name="search"
+          id="site-search"
+          placeholder="Search products..."
+          aria-label="Search products"
+        >
+
+        <button type="submit" aria-label="Submit search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MOBILE MENU OVERLAY
+  ========================== -->
+
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+
+  <!-- =========================
+       HERO SECTION
+  ========================== -->
+
+  <main>
+
+    <section class="hero-section">
+
+      <div class="hero-content">
+
+        <span class="hero-eyebrow">NEW SEASON. NEW ENERGY.</span>
+
+        <h1>
+          BUILT FOR<br>
+          <span>YOUR EVERYDAY.</span>
+        </h1>
+
+        <p>
+          Streetwear that speaks without saying a word.
+          Find your fit. Own your vibe.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="shop.html" class="btn btn-primary">
+            SHOP NOW
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a href="shop.html?category=T-Shirts" class="btn btn-outline">
+            EXPLORE COLLECTION
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-image-wrapper">
+
+        <img
+          src="Layout/data/assets/hero/hero-main.jpg"
+          alt="CLOTH X CLUB streetwear collection"
+          class="hero-image"
+          fetchpriority="high"
+        >
+
+        <div class="hero-image-label">
+          <span>01 / NEW COLLECTION</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORY SECTION
+    ========================== -->
+
+    <section class="categories-section section-padding">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-eyebrow">FIND YOUR FIT</span>
+          <h2>SHOP BY CATEGORY</h2>
+        </div>
+
+        <a href="shop.html" class="section-link">
+          VIEW ALL
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+      <div class="categories-grid">
+
+        <!-- T-Shirts -->
+        <a href="shop.html?category=T-Shirts" class="category-card category-card-large">
+
+          <img
+            src="Layout/data/assets/products/oversized-black-tshirt-1.jpg"
+            alt="Oversized T-shirts"
+            loading="lazy"
+          >
+
+          <div class="category-card-content">
+            <span>01</span>
+            <h3>T-SHIRTS</h3>
+            <p>EVERYDAY ESSENTIALS</p>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </div>
+
+        </a>
+
+
+        <!-- Bottoms -->
+        <a href="shop.html?category=Pants" class="category-card">
+
+          <img
+            src="Layout/data/assets/products/oversized-black-pants-1.jpg"
+            alt="Streetwear pants and cargos"
+            loading="lazy"
+          >
+
+          <div class="category-card-content">
+            <span>02</span>
+            <h3>BOTTOMS</h3>
+            <p>MADE TO MOVE</p>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </div>
+
+        </a>
+
+
+        <!-- Accessories -->
+        <a href="shop.html?category=Accessories" class="category-card">
+
+          <img
+            src="Layout/data/assets/products/oversized-black-hoodie-1.jpg"
+            alt="Streetwear accessories"
+            loading="lazy"
+          >
+
+          <div class="category-card-content">
+            <span>03</span>
+            <h3>ACCESSORIES</h3>
+            <p>THE FINAL TOUCH</p>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURED PRODUCTS
+    ========================== -->
+
+    <section class="featured-section section-padding">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-eyebrow">HANDPICKED FOR YOU</span>
+          <h2>BEST SELLERS</h2>
+        </div>
+
+        <a href="shop.html" class="section-link">
+          SHOP ALL
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+      <!-- Products will be loaded by app/shop JavaScript -->
+      <div
+        class="products-grid"
+        id="featured-products"
+        data-featured-products
+      >
+
+        <!-- JS renders products here -->
+
+      </div>
+
+      <div class="section-bottom-link">
+
+        <a href="shop.html" class="btn btn-outline-dark">
+          VIEW ALL PRODUCTS
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         BRAND BANNER
+    ========================== -->
+
+    <section class="brand-banner">
+
+      <div class="brand-banner-image">
+
+        <img
+          src="Layout/data/assets/hero/brand-banner.jpg"
+          alt="CLOTH X CLUB streetwear lifestyle"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="brand-banner-content">
+
+        <span class="section-eyebrow">MORE THAN JUST CLOTHES</span>
+
+        <h2>
+          YOUR STYLE.<br>
+          YOUR RULES.
+        </h2>
+
+        <p>
+          Wear what feels right. Forget the rules.
+          Make every fit your own.
+        </p>
+
+        <a href="shop.html" class="btn btn-primary">
+          FIND YOUR STYLE
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEW ARRIVALS
+    ========================== -->
+
+    <section class="new-arrivals-section section-padding">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-eyebrow">FRESH DROPS</span>
+          <h2>JUST DROPPED</h2>
+        </div>
+
+        <a href="shop.html?sort=newest" class="section-link">
+          EXPLORE NEW
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+      <div
+        class="products-grid"
+        id="new-arrivals"
+        data-new-arrivals
+      >
+
+        <!-- JS renders new arrivals -->
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PROMOTIONAL SECTION
+    ========================== -->
+
+    <section class="promo-section">
+
+      <div class="promo-content">
+
+        <span class="promo-tag">YOUR NEXT FIT IS HERE</span>
+
+        <h2>UPGRADE<br>YOUR ROTATION.</h2>
+
+        <p>
+          The pieces you'll keep reaching for.
+          The fits you'll never get tired of.
+        </p>
+
+        <a href="shop.html" class="btn btn-light">
+          SHOP THE COLLECTION
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         WHY CLOTH X CLUB
+    ========================== -->
+
+    <section class="benefits-section section-padding">
+
+      <div class="section-heading section-heading-center">
+
+        <div>
+          <span class="section-eyebrow">THE CLOTH X CLUB EXPERIENCE</span>
+          <h2>MADE FOR YOUR EVERYDAY</h2>
+        </div>
+
+      </div>
+
+      <div class="benefits-grid">
+
+        <div class="benefit-card">
+
+          <div class="benefit-icon">
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+
+          <h3>EVERYDAY STYLE</h3>
+
+          <p>
+            Easy-to-wear pieces designed to fit into your everyday rotation.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="benefit-icon">
+            <i class="fa-solid fa-star"></i>
+          </div>
+
+          <h3>STYLE THAT LASTS</h3>
+
+          <p>
+            Versatile essentials made for outfits that never feel outdated.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="benefit-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+
+          <h3>FREE DELIVERY</h3>
+
+          <p>
+            Enjoy free shipping on orders of ₹1,499 and above.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="benefit-icon">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+
+          <h3>SECURE CHECKOUT</h3>
+
+          <p>
+            A simple and secure checkout experience for every order.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         STYLE JOURNAL
+    ========================== -->
+
+    <section class="blog-preview-section section-padding">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="section-eyebrow">GET INSPIRED</span>
+          <h2>THE STYLE JOURNAL</h2>
+        </div>
+
+        <a href="blog.html" class="section-link">
+          READ ALL
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+      <div class="blog-grid" id="homepage-blog" data-blog-preview>
+
+        <!-- Blog posts loaded through blog.js -->
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NEWSLETTER
+    ========================== -->
+
+    <section class="newsletter-section">
+
+      <div class="newsletter-content">
+
+        <span class="section-eyebrow">STAY IN THE LOOP</span>
+
+        <h2>JOIN THE CLUB.</h2>
+
+        <p>
+          Get updates on new drops, exclusive offers and everything CLOTH X CLUB.
+        </p>
+
+        <form class="newsletter-form" id="newsletter-form">
+
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="Enter your email address"
+            aria-label="Your email address"
+            required
+          >
+
+          <button type="submit">
+            JOIN
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+        </form>
+
+        <small>By subscribing, you agree to receive updates from CLOTH X CLUB.</small>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="site-footer">
+
+    <div class="footer-main">
+
+      <!-- Brand -->
+      <div class="footer-brand-column">
+
+        <a href="index.html" class="footer-logo">
+          CLOTH<span>X</span>CLUB
+        </a>
+
+        <p>
+          Everyday streetwear.<br>
+          Everyday expression.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Pinterest">
+            <i class="fa-brands fa-pinterest-p"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Shop Links -->
+      <div class="footer-column">
+
+        <h3>SHOP</h3>
+
+        <a href="shop.html">All Products</a>
+        <a href="shop.html?category=T-Shirts">T-Shirts</a>
+        <a href="shop.html?category=Shirts">Shirts</a>
+        <a href="shop.html?category=Pants">Pants</a>
+        <a href="shop.html?category=Accessories">Accessories</a>
+
+      </div>
+
+
+      <!-- Information -->
+      <div class="footer-column">
+
+        <h3>INFORMATION</h3>
+
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Style Journal</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQs</a>
+
+      </div>
+
+
+      <!-- Support -->
+      <div class="footer-column">
+
+        <h3>HELP & SUPPORT</h3>
+
+        <a href="shipping.html">Shipping Policy</a>
+        <a href="returns.html">Returns & Exchanges</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+
+      </div>
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="current-year">2026</span> CLOTH X CLUB. ALL RIGHTS RESERVED.
+      </p>
+
+      <div class="payment-methods">
+
+        <span>UPI</span>
+        <span>COD</span>
+        <span>VISA</span>
+        <span>MASTERCard</span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
+
+  <div class="cart-overlay" data-cart-overlay></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-label="Shopping cart">
+
+    <div class="cart-header">
+
+      <h2>YOUR BAG</h2>
+
+      <button class="cart-close" data-cart-close aria-label="Close cart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+    <div class="cart-body" data-cart-items>
+
+      <!-- Cart items injected by cart.js -->
+
+    </div>
+
+    <div class="cart-footer">
+
+      <div class="cart-delivery-progress" data-delivery-progress>
+
+        <p data-delivery-message>
+          Add more to unlock free shipping.
+        </p>
+
+        <div class="delivery-progress-track">
+          <div class="delivery-progress-bar" data-delivery-progress-bar></div>
+        </div>
+
+      </div>
+
+      <div class="cart-subtotal-row">
+
+        <span>Subtotal</span>
+        <strong data-cart-subtotal>₹0</strong>
+
+      </div>
+
+      <div class="cart-total-row">
+
+        <span>Total</span>
+        <strong data-cart-total>₹0</strong>
+
+      </div>
+
+      <a href="checkout.html" class="btn btn-primary cart-checkout-btn">
+        PROCEED TO CHECKOUT
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+      <p class="cart-note">
+        Taxes and delivery charges calculated at checkout.
+      </p>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       SCRIPTS
+  ========================== -->
+
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/blog.js"></script>
+
+</body>
+</html>

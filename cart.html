@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Shopping Bag | CLOTH X CLUB</title>
+
+  <meta
+    name="description"
+    content="Review your CLOTH X CLUB shopping bag, update your items and continue to checkout."
+  >
+
+  <meta name="theme-color" content="#111111">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+</head>
+
+<body>
+
+  <!-- =========================
+       ANNOUNCEMENT BAR
+  ========================== -->
+
+  <div class="announcement-bar">
+    <p>FREE SHIPPING ON ORDERS ABOVE ₹1,499</p>
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="site-header" id="site-header">
+
+    <div class="header-container">
+
+      <!-- Mobile Menu -->
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="brand-logo">
+        CLOTH<span>X</span>CLUB
+      </a>
+
+      <!-- Navigation -->
+      <nav class="main-nav" id="main-nav">
+
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="shop.html?category=T-Shirts" class="nav-link">T-Shirts</a>
+        <a href="shop.html?category=Pants" class="nav-link">Bottoms</a>
+        <a href="shop.html?category=Accessories" class="nav-link">Accessories</a>
+        <a href="blog.html" class="nav-link">Style Journal</a>
+
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+
+        <button
+          class="icon-btn"
+          id="search-toggle"
+          aria-label="Search products"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+
+        <button
+          class="icon-btn cart-toggle"
+          data-cart-open
+          aria-label="Open shopping cart"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Search -->
+    <div class="search-panel" id="search-panel">
+
+      <form action="shop.html" method="GET" class="search-form">
+
+        <input
+          type="search"
+          name="search"
+          id="site-search"
+          placeholder="Search products..."
+          aria-label="Search products"
+        >
+
+        <button type="submit" aria-label="Submit search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+
+  <!-- =========================
+       MAIN CART PAGE
+  ========================== -->
+
+  <main class="cart-page section-padding">
+
+    <div class="cart-page-container">
+
+
+      <!-- =========================
+           CART HEADER
+      ========================== -->
+
+      <div class="cart-page-heading">
+
+        <div>
+
+          <span class="section-eyebrow">YOUR CLOTH X CLUB ORDER</span>
+
+          <h1>YOUR BAG<span class="cart-page-count" data-cart-count>0</span></h1>
+
+        </div>
+
+        <a href="shop.html" class="cart-continue-shopping">
+
+          <i class="fa-solid fa-arrow-left"></i>
+
+          CONTINUE SHOPPING
+
+        </a>
+
+      </div>
+
+
+      <!-- =========================
+           CART CONTENT
+      ========================== -->
+
+      <div class="cart-page-layout">
+
+
+        <!-- LEFT: CART ITEMS -->
+
+        <section class="cart-page-items-section">
+
+          <div class="cart-items-heading">
+
+            <h2>SHOPPING BAG</h2>
+
+            <span data-cart-item-count-text>
+              Your items
+            </span>
+
+          </div>
+
+
+          <!-- Cart Items -->
+
+          <div
+            class="cart-page-items"
+            data-cart-items
+          >
+
+            <!-- Cart items rendered by cart.js -->
+
+          </div>
+
+
+          <!-- Empty Cart -->
+
+          <div
+            class="cart-empty-state"
+            data-cart-empty
+            hidden
+          >
+
+            <div class="cart-empty-icon">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+
+            <h2>YOUR BAG IS EMPTY</h2>
+
+            <p>
+              Looks like you haven't found your favourites yet.
+            </p>
+
+            <a href="shop.html" class="btn btn-primary">
+              START SHOPPING
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <!-- Continue Shopping -->
+
+          <div class="cart-bottom-shopping-link">
+
+            <a href="shop.html">
+              <i class="fa-solid fa-arrow-left"></i>
+              CONTINUE SHOPPING
+            </a>
+
+          </div>
+
+        </section>
+
+
+        <!-- RIGHT: ORDER SUMMARY -->
+
+        <aside class="cart-summary-section">
+
+
+          <!-- Free Delivery Progress -->
+
+          <div class="cart-summary-card">
+
+            <div class="cart-summary-header">
+
+              <h2>ORDER SUMMARY</h2>
+
+            </div>
+
+
+            <div
+              class="cart-delivery-progress"
+              data-delivery-progress
+            >
+
+              <p data-delivery-message>
+                Add more to unlock free shipping.
+              </p>
+
+              <div class="delivery-progress-track">
+
+                <div
+                  class="delivery-progress-bar"
+                  data-delivery-progress-bar
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Add-on Offers -->
+
+            <div class="cart-addons-section">
+
+              <div class="cart-addons-heading">
+
+                <h3>COMPLETE YOUR LOOK</h3>
+
+                <p>Exclusive extras available with your order.</p>
+
+              </div>
+
+              <div
+                class="cart-addons-list"
+                data-cart-addons
+              >
+
+                <!-- Add-ons rendered by cart.js -->
+
+              </div>
+
+            </div>
+
+
+            <!-- Summary -->
+
+            <div class="cart-summary-details">
+
+              <div class="cart-summary-row">
+
+                <span>Subtotal</span>
+
+                <strong data-cart-subtotal>₹0</strong>
+
+              </div>
+
+
+              <div class="cart-summary-row">
+
+                <span>You save</span>
+
+                <strong class="cart-savings" data-cart-savings>₹0</strong>
+
+              </div>
+
+
+              <div class="cart-summary-row">
+
+                <span>Delivery</span>
+
+                <strong data-cart-delivery>Calculated at checkout</strong>
+
+              </div>
+
+
+              <div class="cart-summary-row cart-summary-total">
+
+                <span>Estimated Total</span>
+
+                <strong data-cart-total>₹0</strong>
+
+              </div>
+
+              <p class="cart-tax-note">
+                Taxes included where applicable. Shipping calculated based on your order.
+              </p>
+
+            </div>
+
+
+            <!-- Checkout -->
+
+            <a
+              href="checkout.html"
+              class="btn btn-primary cart-checkout-btn"
+              data-cart-checkout
+            >
+
+              PROCEED TO CHECKOUT
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+
+            <!-- Payment Security -->
+
+            <div class="cart-security-note">
+
+              <i class="fa-solid fa-lock"></i>
+
+              <span>SECURE CHECKOUT</span>
+
+            </div>
+
+
+            <!-- Payment Options -->
+
+            <div class="cart-payment-options">
+
+              <span>UPI</span>
+              <span>COD</span>
+              <span>VISA</span>
+              <span>MASTERCARD</span>
+
+            </div>
+
+          </div>
+
+
+          <!-- Shopping Benefits -->
+
+          <div class="cart-benefits-card">
+
+            <div class="cart-benefit-item">
+
+              <i class="fa-solid fa-truck-fast"></i>
+
+              <div>
+
+                <strong>FREE SHIPPING</strong>
+
+                <p>On orders above ₹1,499</p>
+
+              </div>
+
+            </div>
+
+
+            <div class="cart-benefit-item">
+
+              <i class="fa-solid fa-shield-halved"></i>
+
+              <div>
+
+                <strong>SECURE PAYMENTS</strong>
+
+                <p>Safe and secure checkout</p>
+
+              </div>
+
+            </div>
+
+
+            <div class="cart-benefit-item">
+
+              <i class="fa-solid fa-headset"></i>
+
+              <div>
+
+                <strong>NEED HELP?</strong>
+
+                <p>We're here to help you</p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       YOU MAY ALSO LIKE
+  ========================== -->
+
+  <section class="cart-recommendations-section section-padding">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-eyebrow">MAKE IT A FIT</span>
+
+        <h2>YOU MAY ALSO LIKE</h2>
+
+      </div>
+
+      <a href="shop.html" class="section-link">
+
+        SHOP ALL
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </a>
+
+    </div>
+
+
+    <div
+      class="products-grid"
+      data-cart-recommendations
+    >
+
+      <!-- Recommended products rendered by JS -->
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="site-footer">
+
+    <div class="footer-main">
+
+
+      <!-- Brand -->
+
+      <div class="footer-brand-column">
+
+        <a href="index.html" class="footer-logo">
+          CLOTH<span>X</span>CLUB
+        </a>
+
+        <p>
+          Everyday streetwear.<br>
+          Everyday expression.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Pinterest">
+            <i class="fa-brands fa-pinterest-p"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Shop -->
+
+      <div class="footer-column">
+
+        <h3>SHOP</h3>
+
+        <a href="shop.html">All Products</a>
+        <a href="shop.html?category=T-Shirts">T-Shirts</a>
+        <a href="shop.html?category=Shirts">Shirts</a>
+        <a href="shop.html?category=Pants">Pants</a>
+        <a href="shop.html?category=Accessories">Accessories</a>
+
+      </div>
+
+
+      <!-- Information -->
+
+      <div class="footer-column">
+
+        <h3>INFORMATION</h3>
+
+        <a href="about.html">About Us</a>
+        <a href="blog.html">Style Journal</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="faq.html">FAQs</a>
+
+      </div>
+
+
+      <!-- Support -->
+
+      <div class="footer-column">
+
+        <h3>HELP & SUPPORT</h3>
+
+        <a href="shipping.html">Shipping Policy</a>
+        <a href="returns.html">Returns & Exchanges</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+
+      </div>
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="current-year">2026</span> CLOTH X CLUB. ALL RIGHTS RESERVED.
+      </p>
+
+      <div class="payment-methods">
+
+        <span>UPI</span>
+        <span>COD</span>
+        <span>VISA</span>
+        <span>MASTERCARD</span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
+
+  <div class="cart-overlay" data-cart-overlay></div>
+
+  <aside class="cart-drawer" data-cart-drawer aria-label="Shopping cart">
+
+    <div class="cart-header">
+
+      <h2>YOUR BAG</h2>
+
+      <button class="cart-close" data-cart-close aria-label="Close cart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+    <div class="cart-body" data-cart-items>
+
+      <!-- Drawer cart items -->
+
+    </div>
+
+    <div class="cart-footer">
+
+      <div class="cart-delivery-progress" data-delivery-progress>
+
+        <p data-delivery-message>
+          Add more to unlock free shipping.
+        </p>
+
+        <div class="delivery-progress-track">
+
+          <div
+            class="delivery-progress-bar"
+            data-delivery-progress-bar
+          ></div>
+
+        </div>
+
+      </div>
+
+      <div class="cart-subtotal-row">
+
+        <span>Subtotal</span>
+
+        <strong data-cart-subtotal>₹0</strong>
+
+      </div>
+
+      <div class="cart-total-row">
+
+        <span>Total</span>
+
+        <strong data-cart-total>₹0</strong>
+
+      </div>
+
+      <a href="checkout.html" class="btn btn-primary cart-checkout-btn">
+
+        PROCEED TO CHECKOUT
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </a>
+
+      <p class="cart-note">
+        Taxes and delivery charges calculated at checkout.
+      </p>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/shop.js"></script>
+
+</body>
+</html>
