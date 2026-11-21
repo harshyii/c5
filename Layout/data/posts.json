@@ -1,231 +1,105 @@
-
 [
   {
     "id": "post-001",
-    "slug": "how-to-style-oversized-tshirts",
     "title": "How to Style Oversized T-Shirts",
+    "slug": "how-to-style-oversized-tshirts",
     "category": "Style Guide",
-    "tags": ["oversized", "streetwear", "fashion", "styling"],
+    "excerpt": "Learn how to style oversized T-shirts with balanced proportions, simple layers and everyday streetwear essentials.",
     "author": "CLOTH X CLUB",
     "date": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "excerpt": "Oversized T-shirts are a streetwear essential. Learn how to style them effortlessly for a clean, relaxed and confident look.",
-    "featuredImage": "Layout/data/assets/blog/oversized-tshirt-style.jpg",
-    "images": [
-      "Layout/data/assets/blog/oversized-tshirt-style.jpg"
-    ],
+    "tags": "oversized, streetwear, fashion, styling",
+    "readTime": 4,
     "featured": true,
     "status": "published",
-    "readTime": 4,
-    "seo": {
-      "title": "How to Style Oversized T-Shirts | CLOTH X CLUB",
-      "description": "Discover simple ways to style oversized T-shirts with jeans, cargos, sneakers and streetwear essentials."
-    },
     "content": [
-      {
-        "type": "paragraph",
-        "text": "Oversized T-shirts are one of the easiest ways to create a relaxed streetwear look. They are comfortable, versatile and can be styled in multiple ways without making your outfit feel complicated."
-      },
-      {
-        "type": "heading",
-        "text": "1. Pair With Baggy or Straight-Fit Jeans"
-      },
-      {
-        "type": "paragraph",
-        "text": "Combine an oversized T-shirt with straight-fit or relaxed jeans for an effortless everyday outfit. Choose neutral colours for a minimal look or contrasting colours to make your outfit stand out."
-      },
-      {
-        "type": "heading",
-        "text": "2. Style It With Cargo Pants"
-      },
-      {
-        "type": "paragraph",
-        "text": "Cargo pants complement oversized T-shirts perfectly. Pair a basic oversized tee with cargos and sneakers to create a relaxed streetwear-inspired outfit."
-      },
-      {
-        "type": "heading",
-        "text": "3. Experiment With Layering"
-      },
-      {
-        "type": "paragraph",
-        "text": "Layer your oversized T-shirt with an open shirt, lightweight jacket or hoodie depending on the weather. Layering adds depth and makes a simple outfit more interesting."
-      },
-      {
-        "type": "heading",
-        "text": "4. Keep Your Sneakers Simple"
-      },
-      {
-        "type": "paragraph",
-        "text": "White sneakers, chunky sneakers or minimal footwear can complete an oversized outfit. Choose footwear that complements the overall colour palette."
-      },
-      {
-        "type": "heading",
-        "text": "5. Find the Right Fit"
-      },
-      {
-        "type": "paragraph",
-        "text": "Oversized doesn't mean wearing a T-shirt that is simply too large. Look for a relaxed shoulder, comfortable sleeve length and a silhouette that feels intentional."
-      },
-      {
-        "type": "heading",
-        "text": "Final Thoughts"
-      },
-      {
-        "type": "paragraph",
-        "text": "The best oversized outfits are comfortable, balanced and reflect your personality. Start with basics, experiment with combinations and make the look your own."
-      }
-    ]
+      "An oversized T-shirt is one of the easiest foundations for an everyday streetwear outfit. Its relaxed shape gives you room to experiment while keeping the look comfortable.",
+      "Start with proportion. Pair a roomy tee with straight-fit or relaxed trousers. If both pieces are very wide, keep the colours simple so the outfit feels intentional rather than bulky.",
+      "For an easy layered look, add an open shirt, lightweight jacket or overshirt. Finish with clean sneakers and one or two understated accessories. Let the fit do most of the work.",
+      "The best outfit is one you feel comfortable wearing. Try different combinations, keep the pieces that work for you, and make the look your own."
+    ],
+    "content2": "Start with proportion. Pair a roomy tee with straight-fit or relaxed trousers. If both pieces are very wide, keep the colours simple so the outfit feels intentional rather than bulky.",
+    "content3": "For an easy layered look, add an open shirt, lightweight jacket or overshirt. Finish with clean sneakers and one or two understated accessories. Let the fit do most of the work.",
+    "content4": "The best outfit is one you feel comfortable wearing. Try different combinations, keep the pieces that work for you, and make the look your own.",
+    "image1": "Layout/data/assets/blog/oversized-tshirt-style.jpg",
+    "image2": "Layout/data/assets/blog/oversized-tshirt-detail.jpg",
+    "image3": "Layout/data/assets/blog/oversized-tshirt-outfit.jpg",
+    "images": [
+      "Layout/data/assets/blog/oversized-tshirt-style.jpg",
+      "Layout/data/assets/blog/oversized-tshirt-detail.jpg",
+      "Layout/data/assets/blog/oversized-tshirt-outfit.jpg"
+    ],
+    "image": "Layout/data/assets/blog/oversized-tshirt-style.jpg",
+    "published": true
   },
   {
     "id": "post-002",
-    "slug": "streetwear-essentials-every-wardrobe-needs",
     "title": "Streetwear Essentials Every Wardrobe Needs",
+    "slug": "streetwear-essentials-every-wardrobe-needs",
     "category": "Fashion",
-    "tags": ["streetwear", "wardrobe", "essentials", "fashion"],
+    "excerpt": "Build a versatile streetwear wardrobe with dependable T-shirts, relaxed bottoms, sneakers and accessories.",
     "author": "CLOTH X CLUB",
     "date": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "excerpt": "Build a versatile streetwear wardrobe with everyday essentials that are easy to combine and always look good.",
-    "featuredImage": "Layout/data/assets/blog/streetwear-essentials.jpg",
-    "images": [
-      "Layout/data/assets/blog/streetwear-essentials.jpg"
-    ],
-    "featured": false,
-    "status": "published",
+    "tags": "streetwear, wardrobe, essentials, fashion",
     "readTime": 5,
-    "seo": {
-      "title": "Streetwear Essentials Every Wardrobe Needs | CLOTH X CLUB",
-      "description": "Explore the essential streetwear pieces you need to build a versatile everyday wardrobe."
-    },
+    "featured": true,
+    "status": "published",
     "content": [
-      {
-        "type": "paragraph",
-        "text": "Building a streetwear wardrobe doesn't require hundreds of pieces. A few versatile essentials can help you create multiple outfits while keeping your style clean, comfortable and consistent."
-      },
-      {
-        "type": "heading",
-        "text": "Oversized T-Shirts"
-      },
-      {
-        "type": "paragraph",
-        "text": "Oversized T-shirts are a foundation of streetwear. Choose versatile shades such as black, white, grey and earthy tones that work easily with different bottoms."
-      },
-      {
-        "type": "heading",
-        "text": "Relaxed Jeans"
-      },
-      {
-        "type": "paragraph",
-        "text": "Straight-fit and relaxed jeans offer a balanced silhouette. They pair well with oversized tees, printed shirts and casual layers."
-      },
-      {
-        "type": "heading",
-        "text": "Cargo Pants"
-      },
-      {
-        "type": "paragraph",
-        "text": "Cargo pants bring utility-inspired details and a relaxed look. They are an easy option for casual outfits and modern streetwear combinations."
-      },
-      {
-        "type": "heading",
-        "text": "Layering Pieces"
-      },
-      {
-        "type": "paragraph",
-        "text": "Keep an overshirt, hoodie or lightweight jacket ready for layering. These pieces help transform a basic outfit without making it complicated."
-      },
-      {
-        "type": "heading",
-        "text": "Everyday Sneakers"
-      },
-      {
-        "type": "paragraph",
-        "text": "A versatile pair of sneakers completes many streetwear outfits. Neutral footwear is especially useful because it works with multiple colours and styles."
-      },
-      {
-        "type": "heading",
-        "text": "Build Around Your Style"
-      },
-      {
-        "type": "paragraph",
-        "text": "Start with pieces you genuinely enjoy wearing. Your wardrobe should be practical, comfortable and reflect your own personality rather than simply following every trend."
-      }
-    ]
+      "A useful streetwear wardrobe starts with pieces you can wear in more than one way. Choose comfortable shapes, colours that work together and items that suit your everyday routine.",
+      "Begin with a few reliable tops: an oversized black tee, a clean white tee and a shirt or overshirt for layering. These pieces can work across casual outfits without requiring a complicated styling plan.",
+      "For bottoms, consider relaxed jeans or cargo pants in versatile colours. A comfortable pair of sneakers can bring the outfit together, while a cap or simple accessory adds a personal touch.",
+      "You do not need a huge wardrobe to create different looks. Start with essentials you enjoy wearing, then add statement pieces gradually."
+    ],
+    "content2": "Begin with a few reliable tops: an oversized black tee, a clean white tee and a shirt or overshirt for layering. These pieces can work across casual outfits without requiring a complicated styling plan.",
+    "content3": "For bottoms, consider relaxed jeans or cargo pants in versatile colours. A comfortable pair of sneakers can bring the outfit together, while a cap or simple accessory adds a personal touch.",
+    "content4": "You do not need a huge wardrobe to create different looks. Start with essentials you enjoy wearing, then add statement pieces gradually.",
+    "image1": "Layout/data/assets/blog/streetwear-essentials.jpg",
+    "image2": "Layout/data/assets/blog/streetwear-wardrobe-flatlay.jpg",
+    "image3": "Layout/data/assets/blog/streetwear-sneakers.jpg",
+    "image4": "Layout/data/assets/blog/streetwear-accessories.jpg",
+    "images": [
+      "Layout/data/assets/blog/streetwear-essentials.jpg",
+      "Layout/data/assets/blog/streetwear-wardrobe-flatlay.jpg",
+      "Layout/data/assets/blog/streetwear-sneakers.jpg",
+      "Layout/data/assets/blog/streetwear-accessories.jpg"
+    ],
+    "image": "Layout/data/assets/blog/streetwear-essentials.jpg",
+    "published": true
   },
   {
     "id": "post-003",
-    "slug": "fashion-colour-combinations-for-everyday-outfits",
     "title": "Easy Colour Combinations for Everyday Outfits",
+    "slug": "fashion-colour-combinations-for-everyday-outfits",
     "category": "Style Guide",
-    "tags": ["colours", "outfits", "style", "fashion"],
+    "excerpt": "Explore simple black, white, grey, olive and denim combinations for easy everyday outfits.",
     "author": "CLOTH X CLUB",
     "date": "2026-11-16",
-    "updatedAt": "2026-11-16",
-    "excerpt": "Not sure what colours to wear together? Try these simple colour combinations to create balanced and stylish everyday outfits.",
-    "featuredImage": "Layout/data/assets/blog/fashion-color-combinations.jpg",
-    "images": [
-      "Layout/data/assets/blog/fashion-color-combinations.jpg"
-    ],
+    "updatedAt": "2026-11-19",
+    "tags": "colours, outfits, style, fashion",
+    "readTime": 3,
     "featured": false,
     "status": "published",
-    "readTime": 3,
-    "seo": {
-      "title": "Easy Colour Combinations for Everyday Outfits | CLOTH X CLUB",
-      "description": "Learn easy clothing colour combinations for everyday casual wear and streetwear outfits."
-    },
     "content": [
-      {
-        "type": "paragraph",
-        "text": "Choosing outfit colours doesn't have to be difficult. Working with a few neutral colours and adding one contrasting shade can help create outfits that look coordinated without overthinking."
-      },
-      {
-        "type": "heading",
-        "text": "Black and White"
-      },
-      {
-        "type": "paragraph",
-        "text": "Black and white is a timeless combination. Wear a white T-shirt with black pants or reverse the combination for an easy minimal outfit."
-      },
-      {
-        "type": "heading",
-        "text": "Grey and Black"
-      },
-      {
-        "type": "paragraph",
-        "text": "Grey and black create a subtle monochrome look. Combine a grey oversized tee with black jeans or cargos for a simple streetwear outfit."
-      },
-      {
-        "type": "heading",
-        "text": "Beige and White"
-      },
-      {
-        "type": "paragraph",
-        "text": "Beige and white create a clean, light outfit. This combination works well with relaxed fits and simple accessories."
-      },
-      {
-        "type": "heading",
-        "text": "Olive and Black"
-      },
-      {
-        "type": "paragraph",
-        "text": "Olive green adds colour without feeling too bold. Pair olive cargos with a black T-shirt for a balanced casual look."
-      },
-      {
-        "type": "heading",
-        "text": "Keep It Balanced"
-      },
-      {
-        "type": "paragraph",
-        "text": "If you're unsure, start with two colours. Use neutral shades as your foundation and add colour through one clothing item or accessory."
-      },
-      {
-        "type": "heading",
-        "text": "Final Tip"
-      },
-      {
-        "type": "paragraph",
-        "text": "Wear colours that you feel confident in. The easiest outfit to style is one that feels comfortable and natural to you."
-      }
-    ]
+      "A simple colour palette can make getting dressed easier. Neutral shades are easy to combine and provide a useful base for everyday streetwear outfits.",
+      "Black and white create a crisp contrast. Try a black oversized tee with light trousers, or a white tee with black cargos. Keep footwear neutral to maintain a clean finish.",
+      "Grey works well with black, white and denim. Olive can add colour without making an outfit feel too loud, especially when paired with cream, charcoal or washed black.",
+      "Use these combinations as starting points rather than strict rules. Experiment with the pieces you already own and choose colours that feel right to you."
+    ],
+    "content2": "Black and white create a crisp contrast. Try a black oversized tee with light trousers, or a white tee with black cargos. Keep footwear neutral to maintain a clean finish.",
+    "content3": "Grey works well with black, white and denim. Olive can add colour without making an outfit feel too loud, especially when paired with cream, charcoal or washed black.",
+    "content4": "Use these combinations as starting points rather than strict rules. Experiment with the pieces you already own and choose colours that feel right to you.",
+    "image1": "Layout/data/assets/blog/fashion-color-combinations.jpg",
+    "image2": "Layout/data/assets/blog/black-white-outfit.jpg",
+    "image3": "Layout/data/assets/blog/grey-denim-outfit.jpg",
+    "image4": "Layout/data/assets/blog/olive-neutral-outfit.jpg",
+    "images": [
+      "Layout/data/assets/blog/fashion-color-combinations.jpg",
+      "Layout/data/assets/blog/black-white-outfit.jpg",
+      "Layout/data/assets/blog/grey-denim-outfit.jpg",
+      "Layout/data/assets/blog/olive-neutral-outfit.jpg"
+    ],
+    "image": "Layout/data/assets/blog/fashion-color-combinations.jpg",
+    "published": true
   }
 ]

@@ -292,6 +292,36 @@
     }
 
     document.title = `${product.name} | CLOTH X CLUB`;
+    updateProductSEO(product);
+  }
+
+  function updateProductSEO(product) {
+    const canonicalUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(product.id)}`;
+    const descriptionText = String(product.description || `${product.name} from CLOTH X CLUB.`).replace(/\\s+/g, " ").slice(0, 300);
+    const setMeta = (selector, attr, value) => {
+      let el = document.head.querySelector(selector);
+      if (!el) { el = document.createElement("meta"); document.head.appendChild(el); }
+      el.setAttribute(attr, value);
+    };
+    let canonical = document.head.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical); }
+    canonical.href = canonicalUrl;
+    setMeta('meta[name="description"]', "content", descriptionText);
+    setMeta('meta[property="og:type"]', "content", "product");
+    setMeta('meta[property="og:title"]', "content", `${product.name} | CLOTH X CLUB`);
+    setMeta('meta[property="og:description"]', "content", descriptionText);
+    if (product.image) setMeta('meta[property="og:image"]', "content", product.image);
+    let schema = document.head.querySelector('script[data-product-schema]');
+    if (!schema) { schema = document.createElement("script"); schema.type = "application/ld+json"; schema.dataset.productSchema = "true"; document.head.appendChild(schema); }
+    schema.textContent = JSON.stringify({
+      "@context":"https://schema.org","@type":"Product","name":product.name,
+      "description":descriptionText,"sku":String(product.id),
+      "image":product.images || (product.image ? [product.image] : []),
+      "brand":{"@type":"Brand","name":product.brand || "CLOTH X CLUB"},
+      "offers":{"@type":"Offer","url":canonicalUrl,"priceCurrency":"INR","price":Number(product.price || 0),
+        "availability":product.available === false ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+        "itemCondition":"https://schema.org/NewCondition"}
+    });
   }
 
 
@@ -420,6 +450,13 @@
       </div>
     `;
 
+    const firstAvailableSize = container.querySelector("[data-size]:not(:disabled)");
+    if (firstAvailableSize) {
+      selectedSize = firstAvailableSize.dataset.size;
+      firstAvailableSize.classList.add("selected");
+      firstAvailableSize.setAttribute("aria-pressed", "true");
+    }
+
     container.addEventListener("click", event => {
       const button = event.target.closest("[data-size]");
 
@@ -432,6 +469,7 @@
       });
 
       button.classList.add("selected");
+      $$(".size-option", container).forEach(item => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
     });
   }
 
@@ -507,6 +545,13 @@
       </div>
     `;
 
+    const firstColor = container.querySelector("[data-color]");
+    if (firstColor) {
+      selectedColor = firstColor.dataset.color;
+      firstColor.classList.add("selected");
+      firstColor.setAttribute("aria-pressed", "true");
+    }
+
     container.addEventListener("click", event => {
       const button = event.target.closest("[data-color]");
 
@@ -519,6 +564,7 @@
       });
 
       button.classList.add("selected");
+      $$(".color-option", container).forEach(item => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
     });
   }
 

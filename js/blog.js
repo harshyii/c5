@@ -75,7 +75,7 @@
   };
 
   const readingTime = (content = "") => {
-    const words = String(content)
+    const words = (Array.isArray(content) ? content.map(x => typeof x === "string" ? x : x.heading || "").join(" ") : typeof content === "object" ? JSON.stringify(content) : String(content))
       .replace(/<[^>]*>/g, "")
       .trim()
       .split(/\s+/)
@@ -135,12 +135,23 @@
       post.id ||
       slugify(title);
 
-    const content =
-      post.content ||
-      post.body ||
-      post.article ||
-      post.description ||
-      "";
+    const contentParts = [];
+    const pushContent = value => {
+      if (value === null || value === undefined || value === "") return;
+      if (Array.isArray(value)) value.forEach(pushContent);
+      else if (typeof value === "object") {
+        const heading = value.heading || value.title || value.h2 || "";
+        const body = value.body || value.text || value.content || value.paragraph || value.description || "";
+        if (heading) contentParts.push({ heading: String(heading) });
+        if (body) pushContent(body);
+        if (!heading && !body) Object.values(value).forEach(pushContent);
+      } else contentParts.push(String(value));
+    };
+    pushContent(post.content || post.body || post.article || post.description || "");
+    if (!Array.isArray(post.content)) {
+      Object.keys(post).filter(key => /^content\d+$/i.test(key)).sort((a,b)=>Number(a.replace(/\D/g,""))-Number(b.replace(/\D/g,""))).forEach(key=>pushContent(post[key]));
+    }
+    const content = contentParts;
 
     return {
       ...post,
@@ -171,6 +182,8 @@
         post.cover ||
         post.thumbnail ||
         post.featuredImage ||
+        post.image1 ||
+        (Array.isArray(post.images) ? post.images[0] : "") ||
         "",
 
       author:
@@ -474,7 +487,7 @@
         const searchable = [
           post.title,
           post.excerpt,
-          post.content,
+          Array.isArray(post.content) ? post.content.map(x => typeof x === "string" ? x : JSON.stringify(x)).join(" ") : JSON.stringify(post.content),
           post.category
         ]
           .join(" ")
@@ -630,28 +643,20 @@
 
     formatContent(content) {
       if (!content) return "";
-
-      /*
-        If content contains HTML, render it as HTML.
-        If content is plain text, convert line breaks to paragraphs.
-      */
-
-      const text = String(content);
-
-      const containsHTML = /<\/?[a-z][\s\S]*?>/i.test(text);
-
-      if (containsHTML) {
-        return text;
-      }
-
-      return text
-        .split(/\n\s*\n/)
-        .map(paragraph => paragraph.trim())
-        .filter(Boolean)
-        .map(paragraph => `
-          <p>${escapeHTML(paragraph).replace(/\n/g, "<br>")}</p>
-        `)
-        .join("");
+      const parts = Array.isArray(content) ? content : [content];
+      return parts.map(part => {
+        if (part && typeof part === "object") {
+          if (part.html) return String(part.html);
+          if (part.heading) return `<h2>${escapeHTML(part.heading)}</h2>`;
+          const value = part.body || part.text || part.content || part.paragraph || part.description || "";
+          if (Array.isArray(value)) return this.formatContent(value);
+          return value ? `<p>${escapeHTML(String(value)).replace(/\n/g,"<br>")}</p>` : "";
+        }
+        const text = String(part || "").trim();
+        if (!text) return "";
+        if (/<\/?[a-z][\s\S]*?>/i.test(text)) return text;
+        return `<p>${escapeHTML(text).replace(/\n/g,"<br>")}</p>`;
+      }).join("");
     }
 
 
@@ -698,7 +703,24 @@
         document.head.appendChild(canonical);
       }
 
-      canonical.href = window.location.href;
+      canonical.href = window.location.href.split("#")[0];
+      const setMeta = (selector, attr, value) => {
+        let el = $(selector);
+        if (!el) { el = document.createElement("meta"); document.head.appendChild(el); }
+        el.setAttribute(attr, value);
+      };
+      setMeta('meta[property="og:title"]', "content", `${post.title} | CLOTH X CLUB`);
+      setMeta('meta[property="og:description"]', "content", description);
+      if (post.image) setMeta('meta[property="og:image"]', "content", new URL(post.image, window.location.href).href);
+      let schema = $('script[data-article-schema]');
+      if (!schema) { schema = document.createElement("script"); schema.type = "application/ld+json"; schema.dataset.articleSchema = "true"; document.head.appendChild(schema); }
+      schema.textContent = JSON.stringify({
+        "@context":"https://schema.org","@type":"BlogPosting","headline":post.title,
+        "description":description,"image":post.image ? [new URL(post.image, window.location.href).href] : undefined,
+        "datePublished":post.date || undefined,"dateModified":post.updatedAt || post.date || undefined,
+        "author":{"@type":"Organization","name":post.author || "CLOTH X CLUB"},
+        "publisher":{"@type":"Organization","name":"CLOTH X CLUB"},"mainEntityOfPage":canonical.href
+      });
     }
 
 
