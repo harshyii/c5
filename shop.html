@@ -1,32 +1,61 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#111"><meta name="description" content="CLOTH X CLUB — contemporary streetwear and everyday essentials.">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111">
+<meta name="description" content="Shop CLOTH X CLUB streetwear, everyday essentials and accessories."/>
 <title>Shop | CLOTH X CLUB</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 <div class="announcement-bar">FREE DELIVERY ON ORDERS ABOVE ₹1,499</div>
-<header class="site-header" id="header" data-sticky><div class="header-container">
-<button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><i class="fa-solid fa-bars"></i></button>
-<a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a>
-<nav class="main-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="shop.html?category=T-Shirts">T-Shirts</a><a href="blog.html">Journal</a><a href="info.html">About</a></nav>
-<div class="header-actions"><button class="icon-btn search-toggle" id="search-toggle" type="button" aria-label="Open search" aria-expanded="false" aria-controls="search-panel"><i class="fa-solid fa-magnifying-glass"></i></button><a class="icon-btn" href="wishlist.html" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></a><a class="icon-btn" href="cart.html" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count" data-cart-count>0</span></a></div></div>
-<div class="search-panel" id="search-panel"><form action="shop.html" method="get"><label class="sr-only" for="search-input">Search products</label><input id="search-input" name="search" type="search" placeholder="Search products"><button type="submit" aria-label="Search"><i class="fa-solid fa-arrow-right"></i></button></form></div></header>
+<header class="site-header" id="header" data-sticky>
+ <div class="header-container">
+  <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><i class="fa-solid fa-bars"></i></button>
+  <a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a>
+  <nav class="main-nav" aria-label="Main navigation">
+   <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="shop.html?category=T-Shirts">T-Shirts</a><a href="blog.html">Journal</a><a href="info.html">About</a>
+  </nav>
+  <div class="header-actions">
+   <button class="icon-btn search-toggle" id="search-toggle" type="button" aria-label="Open search" aria-expanded="false" aria-controls="search-panel"><i class="fa-solid fa-magnifying-glass"></i></button>
+   <a class="icon-btn" href="wishlist.html" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></a>
+   <a class="icon-btn" href="cart.html" aria-label="Cart"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count" data-cart-count>0</span></a>
+  </div>
+ </div>
+ <div class="search-panel" id="search-panel"><form action="shop.html" method="get"><label class="sr-only" for="search-input">Search products</label><input id="search-input" name="search" type="search" placeholder="Search products"><button type="submit" aria-label="Search"><i class="fa-solid fa-arrow-right"></i></button></form></div>
+</header>
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true"><a href="index.html">Home</a><a href="shop.html">Shop all</a><a href="blog.html">Journal</a><a href="info.html">About & Support</a></div>
+
 <main id="main-content">
-<section class="page-hero compact"><p class="eyebrow">THE CLOTH X CLUB COLLECTION</p><h1>Shop all</h1><p>Find your everyday uniform.</p></section><section class="section shop-section">
-<div class="shop-toolbar"><label><span class="sr-only">Search products</span><input type="search" data-shop-search id="shop-search" placeholder="Search products"></label><label><span class="sr-only">Category</span><select data-shop-category id="shop-category"><option value="">All Categories</option></select></label><label><span class="sr-only">Sort</span><select data-shop-sort id="shop-sort"><option value="">Featured</option><option value="newest">Newest</option><option value="price-low">Price: Low to high</option><option value="price-high">Price: High to low</option><option value="discount">Biggest discount</option><option value="name">Name</option></select></label></div>
-<p data-shop-count aria-live="polite">Loading products…</p><div class="products-grid" id="shop-grid" data-shop-grid aria-live="polite"><p>Loading products…</p></div><button class="btn btn-secondary" type="button" data-shop-load-more id="shop-load-more">Load more</button></section>
-</main>
-<footer class="site-footer"><div class="footer-main"><div><a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a><p>Everyday essentials. Uncomplicated streetwear.</p></div>
-<div class="footer-column"><h3>Shop</h3><a href="shop.html">All products</a><a href="shop.html?category=T-Shirts">T-Shirts</a><a href="shop.html?category=Accessories">Accessories</a></div>
-<div class="footer-column"><h3>Help</h3><a href="info.html#shipping">Shipping</a><a href="info.html#returns">Returns</a><a href="info.html#faq">FAQs</a><a href="info.html#contact">Contact</a></div>
-<div class="footer-column"><h3>Information</h3><a href="info.html#about">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div>
-<div class="footer-bottom">© <span data-current-year>2026</span> CLOTH X CLUB. All rights reserved.</div></footer>
-<script>document.querySelectorAll('[data-current-year]').forEach(e=>e.textContent=new Date().getFullYear())</script>
-<script src="js/app.js" defer></script><script src="js/cart.js" defer></script>
-<script src="js/shop.js" defer></script>
+<section class="page-hero compact"><h1>Shop All</h1><p>Explore everyday essentials and uncomplicated streetwear.</p></section>
+<section class="section"><div class="container">
+<div class="shop-toolbar">
+<div class="shop-search-wrap"><label for="shop-search">Search products</label><input id="shop-search" data-shop-search type="search" placeholder="Search products..."></div>
+<div class="shop-filter"><label for="shop-category">Category</label><select id="shop-category" data-shop-category><option value="">All categories</option></select></div>
+<div class="shop-filter"><label for="shop-sort">Sort by</label><select id="shop-sort" data-shop-sort><option value="featured">Featured</option><option value="price-low">Price: Low to High</option><option value="price-high">Price: High to Low</option><option value="name">Name</option></select></div>
+</div>
+<div class="shop-results-bar"><p><span data-shop-count id="shop-count">Loading products...</span></p></div>
+<div class="products-grid shop-grid" id="shop-grid" data-shop-grid aria-live="polite">
+<div class="shop-loading">Loading products...</div>
+</div>
+<div class="shop-load-more-wrap"><button class="btn btn-outline-dark" type="button" data-shop-load-more id="shop-load-more" hidden>Load more</button></div>
+</div></section></main>
+
+<footer class="site-footer">
+ <div class="footer-main">
+  <div><a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a><p>Everyday essentials. Uncomplicated streetwear.</p></div>
+  <div class="footer-column"><h3>Shop</h3><a href="shop.html">All products</a><a href="shop.html?category=T-Shirts">T-Shirts</a><a href="shop.html?category=Accessories">Accessories</a></div>
+  <div class="footer-column"><h3>Help</h3><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="info.html#faq">FAQs</a><a href="info.html#contact">Contact</a></div>
+  <div class="footer-column"><h3>Information</h3><a href="info.html#about">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+ </div>
+ <div class="footer-bottom">© <span data-current-year>2026</span> CLOTH X CLUB. All rights reserved.</div>
+</footer>
+<script>document.querySelectorAll('[data-current-year]').forEach(e=>e.textContent=new Date().getFullYear());</script>
+<script src="js/app.js" defer></script>
+<script src="js/cart.js" defer></script>
 </body></html>
