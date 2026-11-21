@@ -20,3 +20,49 @@
 @media(max-width:900px){.header-container{height:66px;grid-template-columns:40px 1fr 100px;gap:8px}.menu-toggle{display:grid}.main-nav{display:none}.brand-logo{justify-self:center;font-size:21px}.header-actions{gap:8px}.category-grid{grid-template-columns:repeat(2,1fr)}.category-tile{min-height:300px}.products-grid,.shop-grid,.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.product-detail-layout{grid-template-columns:1fr;gap:30px}.product-information{position:static}.cart-layout{grid-template-columns:1fr}.article-layout{grid-template-columns:1fr;gap:20px}.article-sidebar{display:none}.footer-main{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.announcement-bar{height:29px;font-size:9px}.hero{min-height:620px}.hero-content{padding-bottom:50px}.category-grid{gap:8px}.category-tile{min-height:230px}.category-tile span{left:14px;bottom:14px;font-size:19px}.section-heading{display:block}.section-heading p{margin-top:8px}.editorial-banner,.blog-featured{grid-template-columns:1fr}.editorial-banner img{min-height:230px;max-height:300px}.blog-featured img{min-height:240px;max-height:330px}.shop-toolbar{display:grid;grid-template-columns:1fr 1fr}.shop-search-wrap{grid-column:1/-1}.shop-filter{min-width:0}.shop-toolbar input,.shop-toolbar select{min-width:0}.product-detail-gallery{grid-template-columns:1fr}.product-thumbnails{grid-row:2;display:flex;overflow:auto}.product-thumbnails button{flex:0 0 64px}.product-main-image{grid-row:1}.product-actions{flex-direction:column}.footer-main{grid-template-columns:1fr 1fr;gap:28px 18px}.footer-main>div:first-child{grid-column:1/-1}.footer-bottom{gap:12px;flex-wrap:wrap}.newsletter form{display:grid;gap:8px}.newsletter button{min-height:44px}.page-hero{padding-block:55px}.policy-content{font-size:13px}.article-body{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* ===== CLOTH X CLUB refinement pass: product variants + journal ===== */
+.product-option{margin:26px 0}.product-option-title,.product-option-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0 0 13px;color:#222}
+.product-size-options,.product-color-options{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.size-option{width:48px;height:46px;border:1px solid #dededb;background:#fff;color:#111;font-size:12px;transition:background .18s,color .18s,border .18s}
+.size-option:hover,.size-option.selected{background:#111;color:#fff;border-color:#111}
+.size-option.unavailable{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.color-option{width:42px;height:42px;border:1px solid #dededb;background:#fff;padding:5px;display:grid;place-items:center}
+.color-option .color-swatch{display:block;width:100%;height:100%;background:var(--color-option,#ccc);border:1px solid rgba(0,0,0,.12)}
+.color-option.selected{outline:1px solid #111;outline-offset:3px;border-color:#111}
+.quantity-selector{display:flex;align-items:center;border:1px solid #dededb;width:170px;height:48px}
+.quantity-selector button{width:48px;height:46px;border:0;background:#fff;font-size:16px}
+.quantity-selector input{width:72px;height:46px;border:0;text-align:center;appearance:textfield}
+.quantity-selector input::-webkit-inner-spin-button,.quantity-selector input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.product-stock{font-size:13px;margin:12px 0 30px}.product-stock.in-stock{color:#4b6b4d}.product-stock.out-of-stock{color:#b42318}
+.product-detail-gallery{align-items:start}.product-detail-gallery .product-thumbnails{position:sticky;top:100px}.product-main-image{overflow:hidden}.product-main-image img{display:block;width:100%;height:100%;object-fit:cover}
+.product-thumbnail{overflow:hidden;cursor:pointer}.product-thumbnail.active{border:1px solid #111!important}
+.product-information .product-option-title{margin-bottom:12px}
+.product-actions{margin:30px 0}.product-actions .btn{min-height:54px}
+.blog-featured,.featured-blog{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);background:#f4f4f2;align-items:stretch;min-height:420px;margin:0 0 58px;overflow:hidden}
+.featured-blog-image,.blog-featured>a:first-child{display:block;min-height:420px;overflow:hidden;background:#e9e9e6}
+.featured-blog-image img,.blog-featured>a:first-child img{display:block;width:100%;height:100%;min-height:420px;object-fit:cover;object-position:center}
+.featured-blog-content,.blog-featured-copy{padding:clamp(28px,5vw,68px);align-self:center}
+.featured-label,.featured-blog-content .blog-category{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#777;margin-bottom:12px}
+.featured-blog-content h2{font-size:clamp(30px,4vw,50px);line-height:1.04;margin:14px 0}
+.featured-blog-content h2 a:hover,.blog-card-title a:hover{opacity:.65}
+.featured-blog-content p{font-size:13px;color:#666;max-width:420px;line-height:1.8}
+.blog-meta{display:flex;gap:12px;align-items:center;font-size:10px;color:#888;margin:12px 0}
+.featured-blog-content .btn{margin-top:14px}
+.blog-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 20px}
+.blog-card{min-width:0}
+.blog-card-image{position:relative;display:block;aspect-ratio:4/3;background:#eee;overflow:hidden}
+.blog-card-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.blog-card:hover .blog-card-image img{transform:scale(1.035)}
+.blog-card-image .blog-category{position:absolute;left:12px;bottom:12px;background:#fff;color:#111;padding:6px 9px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.blog-card-content{padding:13px 0 0}
+.blog-card-title{font:600 19px/1.25 var(--serif);letter-spacing:-.035em;margin:5px 0 9px}
+.blog-card-excerpt{font-size:12px;line-height:1.75;color:#686868;margin:0 0 12px}
+.blog-read-more{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:4px}
+.blog-image-placeholder{width:100%;height:100%;min-height:220px;background:#e9e9e6;display:grid;place-items:center;font:700 15px var(--serif);letter-spacing:.08em;color:#777}
+.blog-toolbar{display:grid;grid-template-columns:1fr 190px;gap:16px;margin-bottom:28px}
+.blog-toolbar label{display:block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.blog-toolbar input,.blog-toolbar select{width:100%;height:44px;border:1px solid #e2e2df;padding:0 13px;background:white;font-size:12px}
+.article-main .article-body{max-width:760px}
+@media(max-width:900px){.blog-featured,.featured-blog{grid-template-columns:1fr}.featured-blog-image,.blog-featured>a:first-child,.featured-blog-image img,.blog-featured>a:first-child img{min-height:300px;max-height:470px}.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.blog-grid{grid-template-columns:1fr 1fr;gap:24px 12px}.blog-card-title{font-size:15px}.blog-card-excerpt{font-size:11px}.featured-blog-image,.blog-featured>a:first-child,.featured-blog-image img,.blog-featured>a:first-child img{min-height:260px}.featured-blog-content,.blog-featured-copy{padding:25px 20px}.blog-toolbar{grid-template-columns:1fr}.product-detail-gallery .product-thumbnails{position:static}}

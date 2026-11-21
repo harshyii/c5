@@ -778,11 +778,19 @@
     const buyButton = $(CONFIG.selectors.buyButton);
 
     if (addButton) {
-      addButton.addEventListener("click", addToCart);
+      addButton.addEventListener("click", event => {
+        // Prevent cart.js's legacy delegated handler from treating this
+        // product-page button as an incomplete data-* quick-add card.
+        event.stopPropagation();
+        addToCart();
+      });
     }
 
     if (buyButton) {
-      buyButton.addEventListener("click", buyNow);
+      buyButton.addEventListener("click", event => {
+        event.stopPropagation();
+        buyNow();
+      });
     }
 
     if (currentProduct && !currentProduct.available) {
