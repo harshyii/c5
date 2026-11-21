@@ -393,6 +393,22 @@
   function initGlobalActions() {
     document.addEventListener("click", event => {
 
+      /* Wishlist button */
+      const wishlistButton = event.target.closest(
+        "[data-wishlist], .wishlist-btn"
+      );
+
+      if (wishlistButton) {
+        wishlistButton.classList.toggle("active");
+
+        const active = wishlistButton.classList.contains("active");
+
+        showToast(
+          active ? "Added to wishlist" : "Removed from wishlist",
+          "success"
+        );
+      }
+
       /* Copy coupon code */
       const couponButton = event.target.closest(
         "[data-copy-coupon]"
