@@ -72,22 +72,13 @@
 
   async function loadProducts() {
     try {
-      const response = await fetch(CONFIG.productsPath);
-
-      if (!response.ok) {
-        throw new Error("Products could not be loaded.");
+      if (!window.CXProducts || typeof window.CXProducts.load !== "function") {
+        throw new Error("Google Sheets product loader is missing. Check script order.");
       }
-
-      const data = await response.json();
-
-      const rawProducts = Array.isArray(data)
-        ? data
-        : data.products || data.items || [];
-
-      return rawProducts.map(normalizeProduct);
-
+      const feedProducts = await window.CXProducts.load();
+      return (Array.isArray(feedProducts) ? feedProducts : []).map(normalizeProduct);
     } catch (error) {
-      console.error("CLOTH X CLUB shop loading error:", error);
+      console.error("CLOTH X CLUB shop feed error:", error);
       return [];
     }
   }

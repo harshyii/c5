@@ -79,22 +79,17 @@
 
   async function loadProducts() {
     try {
-      const response = await fetch(CONFIG.productsPath);
-
-      if (!response.ok) {
-        throw new Error("Unable to load products.");
+      if (!window.CXProducts || typeof window.CXProducts.load !== "function") {
+        throw new Error("Google Sheets product loader is missing. Check that js/products.js loads before js/product.js.");
       }
 
-      const data = await response.json();
-
-      products = Array.isArray(data)
-        ? data
-        : data.products || data.items || [];
-
+      // The homepage, shop and product detail must all use the same live feed.
+      // This prevents IDs and images from an old local JSON catalogue being mixed in.
+      const feedProducts = await window.CXProducts.load();
+      products = Array.isArray(feedProducts) ? feedProducts : [];
       return products;
-
     } catch (error) {
-      console.error("CLOTH X CLUB product loading error:", error);
+      console.error("CLOTH X CLUB product feed error:", error);
       return [];
     }
   }
@@ -903,7 +898,15 @@
     const rawProducts = await loadProducts();
 
     if (!rawProducts.length) {
-      console.error("No products found.");
+      console.error("No products found in the Google Sheets catalogue.");
+      const container = $("[data-product-page]") || document.querySelector("main");
+      if (container) {
+        container.innerHTML = `<section class="product-not-found">
+          <h1>Product details unavailable</h1>
+          <p>We could not load this product from the live catalogue. Please refresh or browse the current collection.</p>
+          <a href="${CONFIG.shopPage}" class="btn">Browse products</a>
+        </section>`;
+      }
       return;
     }
 

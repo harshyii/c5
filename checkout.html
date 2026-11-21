@@ -22,7 +22,27 @@
 </div><div class="search-panel" id="search-panel"><form action="shop.html" method="get"><label class="sr-only" for="search-input">Search products</label><input id="search-input" name="search" type="search" placeholder="Search the collection"><button type="submit" aria-label="Submit search"><i class="fa-solid fa-arrow-right"></i></button></form></div></header>
 <nav class="mobile-menu" id="mobile-menu" data-mobile-menu aria-label="Mobile navigation" aria-hidden="true"><a href="index.html">Home</a><a href="shop.html">Shop all</a><a href="blog.html">Journal</a><a href="info.html">About & Support</a><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a></nav>
 
-<main id="main-content"><section class="page-hero"><div class="container"><span class="eyebrow">Almost yours</span><h1>Checkout.</h1><p>Confirm your details carefully. Your final payable amount, delivery charges and available payment methods should be displayed before you place the order.</p></div></section><section class="section"><div class="container policy-content"><h2>Complete your order</h2><p>This storefront currently uses a static front-end cart. A secure order-processing and payment integration must be connected before accepting live payments. Do not submit payment details on this page until an approved payment gateway and server-side order workflow have been configured.</p><p>For help with an existing order, contact <a href="mailto:clothxclub@gmail.com">clothxclub@gmail.com</a> or call <a href="tel:+919991503210">+91 99915 03210</a>.</p><a class="btn" href="cart.html">Return to bag</a></div></section></main>
+<main id="main-content">
+<section class="page-hero"><div class="container"><span class="eyebrow">Secure order</span><h1>Checkout.</h1><p>Confirm your delivery details and scan the UPI QR code to pay the exact order amount.</p></div></section>
+<section class="section checkout-section"><div class="container checkout-layout">
+<form class="checkout-form" id="cx-checkout-form"><h2>Delivery details</h2><div class="checkout-fields">
+<label>Full name<input name="customer_name" autocomplete="name" required maxlength="100"></label>
+<label>Mobile number<input name="phone" type="tel" inputmode="numeric" pattern="[6-9][0-9]{9}" autocomplete="tel" required></label>
+<label>Email address<input name="email" type="email" autocomplete="email" required></label>
+<label>PIN code<input name="pincode" inputmode="numeric" pattern="[1-9][0-9]{5}" autocomplete="postal-code" required></label>
+<label class="field-wide">Full address<textarea name="address" rows="3" autocomplete="street-address" required maxlength="500"></textarea></label>
+<label>City<input name="city" autocomplete="address-level2" required></label><label>State<input name="state" autocomplete="address-level1" required></label>
+</div><p class="checkout-privacy-note">Your details are used to process and deliver this order. See our <a href="privacy.html">Privacy Policy</a>.</p>
+<button class="btn btn-primary checkout-submit" id="cx-create-order" type="submit">Create order &amp; show payment QR</button><p class="checkout-status" id="cx-checkout-status" role="status" aria-live="polite"></p></form>
+<aside class="checkout-summary"><h2>Your order</h2><div id="cx-order-items" class="checkout-order-items"><p>Loading your bag…</p></div>
+<div class="checkout-total-row"><span>Subtotal</span><strong id="cx-subtotal">₹0</strong></div><div class="checkout-total-row"><span>Delivery</span><strong id="cx-delivery">₹0</strong></div><div class="checkout-total-row checkout-grand-total"><span>Total payable</span><strong id="cx-total">₹0</strong></div>
+<p class="checkout-payment-note">UPI payment. The QR code contains the exact payable amount.</p></aside></div></section>
+<section class="section checkout-payment-section" id="cx-payment-section" hidden><div class="container checkout-payment-card"><span class="eyebrow">UPI payment</span><h2>Scan to pay</h2>
+<p>Confirm the recipient and amount in your UPI app before authorising payment.</p><div class="checkout-qr-wrap"><img id="cx-upi-qr" alt="UPI payment QR code"><div><strong id="cx-qr-amount">₹0</strong><span>Exact order amount</span><small>UPI ID: 9050623210@sbi</small></div></div>
+<p class="checkout-order-reference">Order reference: <strong id="cx-order-id"></strong></p><a id="cx-upi-app-link" class="btn btn-primary" href="#">Pay with UPI app</a>
+<form id="cx-payment-proof-form" class="payment-proof-form"><h3>After completing payment</h3><p>Enter the UPI UTR / transaction reference from your payment app. This submits a payment claim for manual verification; it does not automatically mark the order as paid.</p>
+<label>UPI UTR / transaction reference<input name="utr" required minlength="8" maxlength="30" autocomplete="off"></label><button class="btn btn-primary" type="submit">Submit payment reference</button><p id="cx-proof-status" class="checkout-status" role="status" aria-live="polite"></p></form>
+</div></section></main>
 <section class="newsletter"><span class="eyebrow">THE CLOTH X CLUB LETTER</span><h2>Good fits. No noise.</h2><p>Get occasional notes on new drops, styling ideas and what is happening at the club.</p><form data-newsletter-form><label class="sr-only" for="newsletter-email">Email address</label><input id="newsletter-email" type="email" placeholder="Your email address" required><button type="submit">Join the list</button></form></section>
 <footer class="site-footer"><div class="footer-main">
 <div><a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a><p>Everyday essentials, considered streetwear. Built around clean silhouettes, wearable colour and pieces that earn their place in your rotation.</p><p>clothxclub@gmail.com<br>+91 99915 03210</p></div>
@@ -31,5 +51,5 @@
 <div class="footer-column"><h3>Information</h3><a href="info.html">About CLOTH X CLUB</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms & conditions</a></div>
 </div><div class="footer-bottom"><span>© <span data-current-year>2026</span> CLOTH X CLUB. All rights reserved.</span><span>Operated as a proprietorship · Pehowa, Haryana, India</span></div></footer>
 <script>document.querySelectorAll('[data-current-year]').forEach(e=>e.textContent=new Date().getFullYear());</script>
-<script src="js/app.js" defer></script><script src="js/cart.js" defer></script>
+<script src="js/app.js" defer></script><script src="js/cart.js" defer></script><script src="js/checkout.js" defer></script>
 </body></html>
