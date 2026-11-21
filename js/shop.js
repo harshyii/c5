@@ -72,20 +72,8 @@
 
   async function loadProducts() {
     try {
-      const response = await fetch(CONFIG.productsPath);
-
-      if (!response.ok) {
-        throw new Error("Products could not be loaded.");
-      }
-
-      const data = await response.json();
-
-      const rawProducts = Array.isArray(data)
-        ? data
-        : data.products || data.items || [];
-
-      return rawProducts.map(normalizeProduct);
-
+      if (!window.CXProducts?.load) throw new Error("Load js/products.js before js/shop.js.");
+      return await window.CXProducts.load();
     } catch (error) {
       console.error("CLOTH X CLUB shop loading error:", error);
       return [];
@@ -98,103 +86,9 @@
   ========================================================= */
 
   function normalizeProduct(product = {}) {
-    const mrp = Number(
-      product.mrp ??
-      product.originalPrice ??
-      product.original_price ??
-      product.price ??
-      0
-    );
-
-    const price = Number(
-      product.offerPrice ??
-      product.offer_price ??
-      product.salePrice ??
-      product.sale_price ??
-      product.discountPrice ??
-      product.discount_price ??
-      product.price ??
-      mrp
-    );
-
-    let images = [];
-
-    if (Array.isArray(product.images)) {
-      images = product.images;
-    } else if (Array.isArray(product.gallery)) {
-      images = product.gallery;
-    } else if (product.image) {
-      images = [product.image];
-    } else if (product.thumbnail) {
-      images = [product.thumbnail];
-    }
-
-    return {
-      ...product,
-
-      id: String(
-        product.id ??
-        product.productId ??
-        product.product_id ??
-        ""
-      ),
-
-      name:
-        product.name ||
-        product.title ||
-        "Product",
-
-      slug:
-        product.slug ||
-        product.urlSlug ||
-        product.id ||
-        "",
-
-      category:
-        product.category ||
-        product.type ||
-        "Other",
-
-      description:
-        product.description ||
-        product.excerpt ||
-        "",
-
-      mrp: Math.max(0, mrp),
-
-      price: Math.max(0, price),
-
-      images: images.filter(Boolean),
-
-      available:
-        product.available !== false &&
-        product.status !== "out_of_stock" &&
-        product.status !== "inactive",
-
-      stock:
-        product.stock ??
-        product.inventory ??
-        product.quantity ??
-        null,
-
-      sizes:
-        product.sizes ||
-        product.sizeOptions ||
-        product.size_options ||
-        [],
-
-      colors:
-        product.colors ||
-        product.colorOptions ||
-        product.color_options ||
-        [],
-
-      createdAt:
-        product.createdAt ||
-        product.dateAdded ||
-        product.created ||
-        ""
-    };
+    return window.CXProducts?.normalize
+      ? window.CXProducts.normalize(product)
+      : product;
   }
 
 
