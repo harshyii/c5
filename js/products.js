@@ -9,7 +9,7 @@
 
   const CONFIG = {
     SHEET_CSV_URL:
-      "https://docs.google.com/spreadsheets/d/1oGcBQyQ7BdEd_ullw9AjCYejmuXfhyKX1GqtMrGCeN4",
+      "https://docs.google.com/spreadsheets/d/1oGcBQyQ7BdEd_ullw9AjCYejmuXfhyKX1GqtMrGCeN4/edit?usp=sharing&output=csv",
 
     CACHE_MS: 60 * 1000
   };
