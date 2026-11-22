@@ -1,6 +1,6 @@
 /* CLOTH X CLUB product feed loader — Google Sheets CSV */
 (()=>{"use strict";
-const CFG={spreadsheetId:"1ipbhvrFIaOGAj-Z46Tkm9qJY_b476cYoG4sXQRuQ9yY",gid:"0",publishedCsvUrl:"",cacheKey:"cx_products_v2",cacheMs:300000};
+const CFG={spreadsheetId:"1oGcBQyQ7BdEd_ullw9AjCYejmuXfhyKX1GqtMrGCeN4",gid:"0",publishedCsvUrl:"",cacheKey:"cx_products_v2",cacheMs:300000};
 const parseCSV=s=>{let rows=[],r=[],v="",q=false;for(let i=0;i<s.length;i++){let c=s[i],n=s[i+1];if(c==='"'&&q&&n==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===","&&!q){r.push(v);v=""}else if((c==="\n"||c==="\r")&&!q){if(c==="\r"&&n==="\n")i++;r.push(v);if(r.some(x=>x.trim()))rows.push(r);r=[];v=""}else v+=c}r.push(v);if(r.some(x=>x.trim()))rows.push(r);let h=(rows.shift()||[]).map(x=>x.trim().toLowerCase());return rows.map(a=>Object.fromEntries(h.map((k,i)=>[k,(a[i]||"").trim()])))};
 const list=v=>Array.isArray(v)?v:String(v||"").split(/[,;|\n]+/).map(x=>x.trim()).filter(Boolean);
 const money=v=>{let n=Number(String(v||"").replace(/[^\d.-]/g,""));return Number.isFinite(n)?n:0};
