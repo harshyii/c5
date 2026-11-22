@@ -129,7 +129,8 @@ The development approach focuses on:
 | Live Website | https://harshyii.github.io/c5/index.html |
 | GitHub Repository | https://github.com/harshyii/c5 |
 | CLOTH X CLUB | https://harshyii.github.io/c5/index.html |
-
+| CLOTH X CLUB Membership forum link | https://forms.gle/YoxPJcvypTa7JFQi7
+| CLOTH X CLUB E-Book | https://drive.google.com/file/d/1pJ2JQTq3hLj0Ht8tdrptuIX0dOPE9NqJ/view?usp=drive_link
 ---
 
 ## Business Information
