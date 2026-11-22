@@ -3,4 +3,4 @@ Allow: /
 Disallow: /checkout.html
 Disallow: /cart.html
 Disallow: /wishlist.html
-Sitemap: https://harshyii.github.io/clothxclub/sitemap.xml
+Sitemap: https://harshyii.github.io/c5/sitemap.xml
