@@ -1,424 +1,239 @@
 
-/* =========================================================
-   CLOTH X CLUB — GOOGLE SHEETS PRODUCT LOADER
-   Supports the new product sheet structure.
-   ========================================================= */
+/**
+ * CLOTH X CLUB — PAGINATED PRODUCT CLIENT
+ * Homepage: 12 products
+ * Shop: 12 products per batch
+ * Product page: one product by ID
+ */
 
 (() => {
   "use strict";
 
-  const CONFIG = {
-    SHEET_CSV_URL:
-      "https://docs.google.com/spreadsheets/d/1oGcBQyQ7BdEd_ullw9AjCYejmuXfhyKX1GqtMrGCeN4",
+  const API_URL = "https://script.google.com/macros/s/AKfycbwedB2j2FwFYJoDQzjowsxCLmnIYf_jjLCwNkvZeBYjrUhX4Wks9c1r4_Rg9TuDj-9G/exec";
 
-    CACHE_MS: 60 * 1000
-  };
+  const PAGE_SIZE = 12;
+  const cache = new Map();
 
-  let cache = null;
-  let cacheTime = 0;
-  let pending = null;
+  function request(params) {
+    return new Promise((resolve, reject) => {
+      const callback =
+        "cxProducts_" +
+        Date.now() +
+        "_" +
+        Math.random().toString(36).slice(2);
 
-  /* ---------- BASIC HELPERS ---------- */
-
-  function clean(value) {
-    return String(value ?? "").trim();
-  }
-
-  function number(value) {
-    const parsed = Number(
-      String(value ?? "").replace(/[^\d.-]/g, "")
-    );
-
-    return Number.isFinite(parsed) ? parsed : 0;
-  }
-
-  function first(record, names) {
-    for (const name of names) {
-      const value = clean(record[name.toLowerCase()]);
-      if (value) return value;
-    }
-
-    return "";
-  }
-
-  function list(value) {
-    return clean(value)
-      .split(/[|,;]/)
-      .map(item => item.trim())
-      .filter(Boolean);
-  }
-
-  /* ---------- CSV PARSER ---------- */
-
-  function csvToRows(csv) {
-    const rows = [];
-
-    let row = [];
-    let cell = "";
-    let quoted = false;
-
-    for (let i = 0; i < csv.length; i++) {
-      const ch = csv[i];
-      const next = csv[i + 1];
-
-      if (ch === '"' && quoted && next === '"') {
-        cell += '"';
-        i++;
-      }
-
-      else if (ch === '"') {
-        quoted = !quoted;
-      }
-
-      else if (ch === "," && !quoted) {
-        row.push(cell);
-        cell = "";
-      }
-
-      else if (
-        (ch === "\n" || ch === "\r") &&
-        !quoted
-      ) {
-        if (ch === "\r" && next === "\n") {
-          i++;
-        }
-
-        row.push(cell);
-
-        if (row.some(value => clean(value) !== "")) {
-          rows.push(row);
-        }
-
-        row = [];
-        cell = "";
-      }
-
-      else {
-        cell += ch;
-      }
-    }
-
-    row.push(cell);
-
-    if (row.some(value => clean(value) !== "")) {
-      rows.push(row);
-    }
-
-    return rows;
-  }
-
-  function parseCSV(csv) {
-    const rows = csvToRows(csv);
-
-    if (rows.length < 2) return [];
-
-    const headers = rows[0].map(header =>
-      clean(header)
-        .replace(/^\uFEFF/, "")
-        .toLowerCase()
-    );
-
-    return rows.slice(1).map(values => {
-      const record = {};
-
-      headers.forEach((header, index) => {
-        if (header) {
-          record[header] = values[index] ?? "";
-        }
+      const query = new URLSearchParams({
+        ...params,
+        callback
       });
 
-      return record;
+      const script = document.createElement("script");
+      const timeout = setTimeout(() => {
+        cleanup();
+        reject(new Error("Product server timed out."));
+      }, 15000);
+
+      function cleanup() {
+        clearTimeout(timeout);
+        delete window[callback];
+        script.remove();
+      }
+
+      window[callback] = data => {
+        cleanup();
+
+        if (!data || !data.success) {
+          reject(new Error(data?.error || "Unable to load products."));
+          return;
+        }
+
+        resolve(data);
+      };
+
+      script.onerror = () => {
+        cleanup();
+        reject(new Error("Could not connect to product spreadsheet."));
+      };
+
+      script.src = API_URL + "?" + query.toString();
+      document.head.appendChild(script);
     });
   }
 
-  /* ---------- PRODUCT IMAGES ---------- */
+  function number(value) {
+    const result = Number(
+      String(value || "").replace(/[^\d.-]/g, "")
+    );
 
-  function imageList(record) {
-    const candidates = [
-      record.image_link,
+    return Number.isFinite(result) ? result : 0;
+  }
 
-      record.additional_image_link_1,
-      record.additional_image_link_2,
-      record.additional_image_link_3,
-      record.additional_image_link_4,
-      record.additional_image_link_5,
-      record.additional_image_link_6,
-
-      record.image_url_7,
-      record.image_url_8
-    ];
-
-    const seen = new Set();
-
-    return candidates
-      .map(clean)
-
-      .filter(url =>
-        /^https?:\/\//i.test(url)
+  function images(row) {
+    return Object.entries(row)
+      .filter(([key, value]) =>
+        (
+          key === "image_link" ||
+          key.startsWith("additional_image") ||
+          key.startsWith("image_url")
+        ) &&
+        /^https?:\/\//i.test(String(value || "").trim())
       )
-
-      .filter(url => {
-        if (seen.has(url)) return false;
-
-        seen.add(url);
-        return true;
+      .sort((a, b) => {
+        if (a[0] === "image_link") return -1;
+        if (b[0] === "image_link") return 1;
+        return a[0].localeCompare(b[0], undefined, {
+          numeric: true
+        });
       })
-
+      .map(([, value]) => String(value).trim())
+      .filter((url, index, all) => all.indexOf(url) === index)
       .slice(0, 9);
   }
 
-  /* ---------- MAP SHEET ROW TO PRODUCT ---------- */
+  function mapProduct(row) {
+    const sale = number(row.sale_price);
+    const mrp = number(row.price);
 
-  function mapProduct(record) {
-    const id = first(record, ["id"]);
+    const gallery = images(row);
 
-    const title = first(record, ["title"]);
+    const specs = {};
 
-    const salePrice = number(
-      first(record, ["sale_price"])
-    );
-
-    const listedPrice = number(
-      first(record, ["price"])
-    );
-
-    const price =
-      salePrice > 0
-        ? salePrice
-        : listedPrice;
-
-    const mrp =
-      listedPrice > 0
-        ? listedPrice
-        : price;
-
-    const images = imageList(record);
-
-    /* Product specifications */
-
-    const colour = first(record, [
-      "spec_colour",
-      "spec_color",
-      "spec_accent color"
-    ]);
-
-    const size = first(record, [
-      "spec_size"
-    ]);
-
-    const fit = first(record, [
-      "spec_fitting type",
-      "spec_fit type"
-    ]);
-
-    const pattern = first(record, [
-      "spec_pattern"
-    ]);
-
-    const material = first(record, [
-      "spec_material type",
-      "spec_material",
-      "spec_fabric type",
-      "spec_materialtype"
-    ]);
-
-    const style = first(record, [
-      "spec_style name",
-      "spec_stylename",
-      "spec_style",
-      "spec_design name"
-    ]);
-
-    const category = first(record, [
-      "category",
-      "product_type",
-      "google_product_category",
-      "spec_item type name"
-    ]);
-
-    const highlights = [
-      style,
-      fit,
-      material,
-      pattern
-    ].filter(Boolean);
-
-    const rating = number(
-      first(record, ["rating"])
-    );
-
-    /* ---------- FINAL PRODUCT OBJECT ---------- */
+    Object.entries(row).forEach(([key, value]) => {
+      if (key.startsWith("spec_") && value) {
+        specs[key.replace(/^spec_/, "")] = value;
+      }
+    });
 
     return {
-      id: id,
+      ...row,
 
-      title: title || "Untitled product",
-      name: title || "Untitled product",
+      id: String(row.id),
+      title: row.title || "Untitled product",
+      name: row.title || "Untitled product",
 
-      brand:
-        first(record, [
-          "brand",
-          "spec_brand",
-          "spec_brand name"
-        ]) || "CLOTH X CLUB",
+      brand: row.brand || "CLOTH X CLUB",
 
-      description: first(record, [
-        "description"
-      ]),
+      price: sale > 0 ? sale : mrp,
+      salePrice: sale > 0 ? sale : mrp,
+      sale_price: sale > 0 ? sale : mrp,
 
-      /* Pricing */
+      mrp: mrp > 0 ? mrp : (sale || 0),
+      originalPrice: mrp > 0 ? mrp : (sale || 0),
 
-      price: price,
-      salePrice: salePrice || price,
-      sale_price: salePrice || price,
+      image: gallery[0] || "",
+      images: gallery,
+      additionalImages: gallery.slice(1),
 
-      mrp: mrp,
-      originalPrice: mrp,
-      compareAtPrice: mrp,
+      color: row.color || specs.colour || specs.color || "",
+      colour: row.color || specs.colour || specs.color || "",
 
-      /* Rating */
+      size: row.size || specs.size || "",
+      sizes: String(row.size || specs.size || "")
+        .split(/[|,;]/)
+        .map(value => value.trim())
+        .filter(Boolean),
 
-      rating: rating || null,
+      specs,
 
-      /* Product URL */
+      description: row.description || "",
+      availability: row.availability || "in stock",
 
-      productUrl: first(record, [
-        "product_url"
-      ]),
-
-      link:
-        "product.html?id=" +
-        encodeURIComponent(id),
-
-      /* Images */
-
-      image: images[0] || "",
-      image_link: images[0] || "",
-
-      images: images,
-      additionalImages: images.slice(1),
-
-      /* Product details */
-
-      category: category || style || "Clothing",
-
-      color: colour,
-      colour: colour,
-
-      colors: colour ? [colour] : [],
-
-      size: size,
-      sizes: list(size),
-
-      fit: fit,
-      material: material,
-      pattern: pattern,
-      style: style,
-
-      highlights: highlights,
-
-      /* Availability */
-
-      available: true,
-      availability: "in stock",
-
-      stock: 1,
-      quantity: 1,
-
-      /* Preserve every original sheet column */
-
-      raw: record
+      link: "product.html?id=" + encodeURIComponent(row.id)
     };
   }
 
-  /* ---------- LOAD PRODUCTS ---------- */
+  async function getPage(offset = 0, limit = PAGE_SIZE) {
+    const key = "page:" + offset + ":" + limit;
 
-  async function load(options = {}) {
-    const force = Boolean(options.force);
-
-    if (
-      !force &&
-      cache &&
-      Date.now() - cacheTime < CONFIG.CACHE_MS
-    ) {
-      return cache.slice();
+    if (cache.has(key)) {
+      return cache.get(key);
     }
 
-    if (!force && pending) {
-      return pending;
-    }
+    const result = await request({
+      offset,
+      limit
+    });
 
-    pending = fetch(CONFIG.SHEET_CSV_URL, {
-      method: "GET",
-      cache: "no-store",
+    const data = {
+      products: result.products.map(mapProduct),
+      total: result.total,
+      offset: result.offset,
+      hasMore: result.hasMore
+    };
 
-      headers: {
-        "Accept": "text/csv,text/plain,*/*"
-      }
-    })
+    cache.set(key, data);
 
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(
-            `Google Sheet request failed (${response.status})`
-          );
-        }
-
-        return response.text();
-      })
-
-      .then(csv => {
-        if (
-          /^\s*<!doctype html|^\s*<html/i.test(csv)
-        ) {
-          throw new Error(
-            "Google Sheet returned HTML. Check sheet sharing and publishing access."
-          );
-        }
-
-        const products = parseCSV(csv)
-          .map(mapProduct)
-
-          .filter(product =>
-            product.id &&
-            product.title &&
-            product.price > 0
-          );
-
-        if (!products.length) {
-          throw new Error(
-            "No valid products found. Check id, title and price columns."
-          );
-        }
-
-        cache = products;
-        cacheTime = Date.now();
-
-        return products.slice();
-      })
-
-      .finally(() => {
-        pending = null;
-      });
-
-    return pending;
+    return data;
   }
 
-  /* ---------- PUBLIC API ---------- */
+  async function getProduct(id) {
+    const key = "product:" + id;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+
+    const result = await request({ id });
+
+    const product = result.products.length
+      ? mapProduct(result.products[0])
+      : null;
+
+    if (product) {
+      cache.set(key, product);
+    }
+
+    return product;
+  }
+
+  async function getAllPages(options = {}) {
+    const limit = Math.min(
+      PAGE_SIZE,
+      Math.max(1, Number(options.limit) || PAGE_SIZE)
+    );
+
+    const first = await getPage(0, limit);
+
+    return first;
+  }
+
+  async function search(query, options = {}) {
+    const term = String(query || "").trim().toLowerCase();
+
+    if (!term) {
+      return getPage(0, options.limit || PAGE_SIZE);
+    }
+
+    // Search only the pages requested by the caller.
+    // This does not download the entire catalogue.
+    const page = await getPage(
+      options.offset || 0,
+      options.limit || PAGE_SIZE
+    );
+
+    return {
+      ...page,
+      products: page.products.filter(product =>
+        [
+          product.title,
+          product.brand,
+          product.description,
+          product.category
+        ].join(" ").toLowerCase().includes(term)
+      )
+    };
+  }
 
   window.CXProducts = {
-    load,
+    load: getAllPages,
+    getPage,
+    getProduct,
+    search,
+    mapProduct,
+    pageSize: PAGE_SIZE,
 
     clearCache() {
-      cache = null;
-      cacheTime = 0;
-      pending = null;
-    },
-
-    mapProduct,
-
-    config: {
-      ...CONFIG
+      cache.clear();
     }
   };
 
