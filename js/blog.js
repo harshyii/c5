@@ -642,21 +642,21 @@
 
 
     formatContent(content) {
-      if (!content) return "";
-      const parts = Array.isArray(content) ? content : [content];
-      return parts.map(part => {
-        if (part && typeof part === "object") {
-          if (part.html) return String(part.html);
-          if (part.heading) return `<h2>${escapeHTML(part.heading)}</h2>`;
-          const value = part.body || part.text || part.content || part.paragraph || part.description || "";
-          if (Array.isArray(value)) return this.formatContent(value);
-          return value ? `<p>${escapeHTML(String(value)).replace(/\n/g,"<br>")}</p>` : "";
+      const renderPart = (part) => {
+        if (part === null || part === undefined) return "";
+        if (Array.isArray(part)) return part.map(renderPart).join("");
+        if (typeof part === "object") {
+          if (typeof part.html === "string") return part.html;
+          if (part.heading) return `<h2>${escapeHTML(String(part.heading))}</h2>`;
+          const value = part.body ?? part.text ?? part.content ?? part.paragraph ?? part.description ?? "";
+          return renderPart(value);
         }
-        const text = String(part || "").trim();
+        const text = String(part).trim();
         if (!text) return "";
         if (/<\/?[a-z][\s\S]*?>/i.test(text)) return text;
         return `<p>${escapeHTML(text).replace(/\n/g,"<br>")}</p>`;
-      }).join("");
+      };
+      return renderPart(content);
     }
 
 

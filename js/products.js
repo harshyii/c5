@@ -1,240 +1,52 @@
-
-/**
- * CLOTH X CLUB — PAGINATED PRODUCT CLIENT
- * Homepage: 12 products
- * Shop: 12 products per batch
- * Product page: one product by ID
- */
-
-(() => {
-  "use strict";
-
-  const API_URL = "https://script.google.com/macros/s/AKfycbwedB2j2FwFYJoDQzjowsxCLmnIYf_jjLCwNkvZeBYjrUhX4Wks9c1r4_Rg9TuDj-9G/exec";
-
-  const PAGE_SIZE = 12;
-  const cache = new Map();
-
-  function request(params) {
-    return new Promise((resolve, reject) => {
-      const callback =
-        "cxProducts_" +
-        Date.now() +
-        "_" +
-        Math.random().toString(36).slice(2);
-
-      const query = new URLSearchParams({
-        ...params,
-        callback
-      });
-
-      const script = document.createElement("script");
-      const timeout = setTimeout(() => {
-        cleanup();
-        reject(new Error("Product server timed out."));
-      }, 15000);
-
-      function cleanup() {
-        clearTimeout(timeout);
-        delete window[callback];
-        script.remove();
-      }
-
-      window[callback] = data => {
-        cleanup();
-
-        if (!data || !data.success) {
-          reject(new Error(data?.error || "Unable to load products."));
-          return;
-        }
-
-        resolve(data);
-      };
-
-      script.onerror = () => {
-        cleanup();
-        reject(new Error("Could not connect to product spreadsheet."));
-      };
-
-      script.src = API_URL + "?" + query.toString();
-      document.head.appendChild(script);
-    });
-  }
-
-  function number(value) {
-    const result = Number(
-      String(value || "").replace(/[^\d.-]/g, "")
-    );
-
-    return Number.isFinite(result) ? result : 0;
-  }
-
-  function images(row) {
-    return Object.entries(row)
-      .filter(([key, value]) =>
-        (
-          key === "image_link" ||
-          key.startsWith("additional_image") ||
-          key.startsWith("image_url")
-        ) &&
-        /^https?:\/\//i.test(String(value || "").trim())
-      )
-      .sort((a, b) => {
-        if (a[0] === "image_link") return -1;
-        if (b[0] === "image_link") return 1;
-        return a[0].localeCompare(b[0], undefined, {
-          numeric: true
-        });
-      })
-      .map(([, value]) => String(value).trim())
-      .filter((url, index, all) => all.indexOf(url) === index)
-      .slice(0, 9);
-  }
-
-  function mapProduct(row) {
-    const sale = number(row.sale_price);
-    const mrp = number(row.price);
-
-    const gallery = images(row);
-
-    const specs = {};
-
-    Object.entries(row).forEach(([key, value]) => {
-      if (key.startsWith("spec_") && value) {
-        specs[key.replace(/^spec_/, "")] = value;
-      }
-    });
-
-    return {
-      ...row,
-
-      id: String(row.id),
-      title: row.title || "Untitled product",
-      name: row.title || "Untitled product",
-
-      brand: row.brand || "CLOTH X CLUB",
-
-      price: sale > 0 ? sale : mrp,
-      salePrice: sale > 0 ? sale : mrp,
-      sale_price: sale > 0 ? sale : mrp,
-
-      mrp: mrp > 0 ? mrp : (sale || 0),
-      originalPrice: mrp > 0 ? mrp : (sale || 0),
-
-      image: gallery[0] || "",
-      images: gallery,
-      additionalImages: gallery.slice(1),
-
-      color: row.color || specs.colour || specs.color || "",
-      colour: row.color || specs.colour || specs.color || "",
-
-      size: row.size || specs.size || "",
-      sizes: String(row.size || specs.size || "")
-        .split(/[|,;]/)
-        .map(value => value.trim())
-        .filter(Boolean),
-
-      specs,
-
-      description: row.description || "",
-      availability: row.availability || "in stock",
-
-      link: "product.html?id=" + encodeURIComponent(row.id)
-    };
-  }
-
-  async function getPage(offset = 0, limit = PAGE_SIZE) {
-    const key = "page:" + offset + ":" + limit;
-
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-
-    const result = await request({
-      offset,
-      limit
-    });
-
-    const data = {
-      products: result.products.map(mapProduct),
-      total: result.total,
-      offset: result.offset,
-      hasMore: result.hasMore
-    };
-
-    cache.set(key, data);
-
-    return data;
-  }
-
-  async function getProduct(id) {
-    const key = "product:" + id;
-
-    if (cache.has(key)) {
-      return cache.get(key);
-    }
-
-    const result = await request({ id });
-
-    const product = result.products.length
-      ? mapProduct(result.products[0])
-      : null;
-
-    if (product) {
-      cache.set(key, product);
-    }
-
-    return product;
-  }
-
-  async function getAllPages(options = {}) {
-    const limit = Math.min(
-      PAGE_SIZE,
-      Math.max(1, Number(options.limit) || PAGE_SIZE)
-    );
-
-    const first = await getPage(0, limit);
-
-    return first;
-  }
-
-  async function search(query, options = {}) {
-    const term = String(query || "").trim().toLowerCase();
-
-    if (!term) {
-      return getPage(0, options.limit || PAGE_SIZE);
-    }
-
-    // Search only the pages requested by the caller.
-    // This does not download the entire catalogue.
-    const page = await getPage(
-      options.offset || 0,
-      options.limit || PAGE_SIZE
-    );
-
-    return {
-      ...page,
-      products: page.products.filter(product =>
-        [
-          product.title,
-          product.brand,
-          product.description,
-          product.category
-        ].join(" ").toLowerCase().includes(term)
-      )
-    };
-  }
-
-  window.CXProducts = {
-    load: getAllPages,
-    getPage,
-    getProduct,
-    search,
-    mapProduct,
-    pageSize: PAGE_SIZE,
-
-    clearCache() {
-      cache.clear();
-    }
-  };
-
+/* CLOTH X CLUB — paginated Google Sheets product API */
+(()=>{"use strict";
+const API_URL="https://script.google.com/macros/s/AKfycbwedB2j2FwFYJoDQzjowsxCLmnIYf_jjLCwNkvZeBYjrUhX4Wks9c1r4_Rg9TuDj-9G/exec";
+const PAGE_SIZE=12, cache=new Map();
+const money=v=>{const n=Number(String(v??"").replace(/[^\d.-]/g,""));return Number.isFinite(n)?n:0};
+function parseImages(row){
+ const keys=Object.keys(row);
+ const ordered=keys.filter(k=>k==="image_link"||/^additional_image/.test(k)||/^image_url/.test(k))
+ .sort((a,b)=>a==="image_link"?-1:b==="image_link"?1:a.localeCompare(b,undefined,{numeric:true}));
+ return [...new Set(ordered.map(k=>String(row[k]||"").trim()).filter(u=>/^https?:\/\//i.test(u)))].slice(0,6);
+}
+function normalize(row){
+ const mrp=money(row.price),sale=money(row.sale_price),imgs=parseImages(row);
+ const specs={};Object.entries(row).forEach(([k,v])=>{if(k.startsWith("spec_")&&v)specs[k.slice(5)]=v});
+ const size=String(row.size||specs.Size||specs.size||"").trim();
+ const color=String(row.color||specs.Colour||specs.Color||specs.colour||"").trim();
+ const qty=row.quantity===""||row.quantity==null?null:Math.max(0,Math.floor(money(row.quantity)));
+ const av=String(row.availability||"").toLowerCase();
+ return {...row,id:String(row.id||""),title:String(row.title||"Product"),name:String(row.title||"Product"),
+ price:sale>0?sale:mrp,mrp:mrp>0?mrp:(sale||0),salePrice:sale>0?sale:mrp,
+ image:imgs[0]||"",images:imgs,additionalImages:imgs.slice(1),specs,
+ size,color,sizes:size?size.split(/[|,;]/).map(x=>x.trim()).filter(Boolean):[],
+ colors:color?color.split(/[|,;]/).map(x=>x.trim()).filter(Boolean):[],
+ category:row.category||row.product_type||row.product_highlight||"Clothing",
+ brand:row.brand||"CLOTH X CLUB",quantity:qty,stock:qty,
+ available:av?/out of stock|out_of_stock|unavailable|discontinued/.test(av)===false:qty===null||qty>0,
+ link:"product.html?id="+encodeURIComponent(row.id)};
+}
+function request(params){
+ return new Promise((resolve,reject)=>{
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(API_URL)){reject(Error("Product API URL is not configured in js/products.js."));return}
+  const cb="cxp_"+Date.now()+"_"+Math.random().toString(36).slice(2),script=document.createElement("script"),q=new URLSearchParams({...params,callback:cb});
+  const timer=setTimeout(()=>{cleanup();reject(Error("Product service timed out."))},15000);
+  function cleanup(){clearTimeout(timer);delete window[cb];script.remove()}
+  window[cb]=data=>{cleanup();if(!data?.success){reject(Error(data?.error||"Product request failed."));return}resolve(data)};
+  script.onerror=()=>{cleanup();reject(Error("Could not connect to product service."))};
+  script.src=API_URL+"?"+q;document.head.appendChild(script);
+ });
+}
+async function getPage(offset=0,limit=PAGE_SIZE){
+ const key=`p:${offset}:${limit}`;if(cache.has(key))return cache.get(key);
+ const data=await request({offset,limit});
+ const result={products:(data.products||[]).map(normalize).filter(p=>p.id&&p.title),total:data.total||0,offset:data.offset||0,limit:data.limit||limit,hasMore:!!data.hasMore};
+ cache.set(key,result);return result;
+}
+async function getProduct(id){
+ const key="id:"+id;if(cache.has(key))return cache.get(key);
+ const data=await request({id:String(id)}),p=data.products?.[0]?normalize(data.products[0]):null;
+ if(p)cache.set(key,p);return p;
+}
+window.CXProducts={pageSize:PAGE_SIZE,getPage,getProduct,load:async()=>((await getPage(0,PAGE_SIZE)).products),clearCache:()=>cache.clear()};
 })();
