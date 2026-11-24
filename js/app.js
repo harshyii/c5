@@ -373,14 +373,24 @@
           return;
         }
 
-        /*
-          Front-end only for now.
-          Connect to your backend/email provider later.
-        */
-
-        showToast("Thank you for subscribing!", "success");
-
-        form.reset();
+        const endpoint = "https://script.google.com/macros/s/AKfycbwUCeTp-u165Q57Vu8aIQU_Q3RNmWx7gQopacwQH4YAyyVfWR0W61gCPoNfawkhqmpo/exec";
+        const submit = $("button[type='submit']", form);
+        if (submit) { submit.disabled = true; submit.textContent = "Joining…"; }
+        const body = new URLSearchParams({
+          action: "newsletterSignup",
+          email,
+          source: location.pathname,
+          subscribedAt: new Date().toISOString()
+        });
+        fetch(endpoint, { method: "POST", mode: "no-cors", body })
+          .then(() => {
+            showToast("Thank you. You've joined the CLOTH X CLUB letter.", "success");
+            form.reset();
+          })
+          .catch(() => showToast("We could not save your subscription. Please try again.", "error"))
+          .finally(() => {
+            if (submit) { submit.disabled = false; submit.textContent = "Join the list"; }
+          });
       });
     });
   }

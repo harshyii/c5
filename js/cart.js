@@ -22,27 +22,7 @@
 
     maxAddonOffers: 3,
 
-    /* Initial checkout add-on offers */
-    addonOffers: [
-      {
-        id: "handkerchief-01",
-        name: "Premium Handkerchief",
-        mrp: 40,
-        offerPrice: 29,
-        image: "Layout/data/assets/products/handkerchief.jpg",
-        category: "Accessories",
-        active: true
-      },
-      {
-        id: "socks-01",
-        name: "Everyday Cotton Socks",
-        mrp: 99,
-        offerPrice: 79,
-        image: "Layout/data/assets/products/socks.jpg",
-        category: "Accessories",
-        active: true
-      }
-    ]
+    addonOffers: []
   };
 
 
@@ -141,6 +121,8 @@
     return {
       id: String(item.id || item.productId || createId()),
 
+      productId: String(item.productId || item.id || ""),
+
       name: item.name || item.title || "Product",
 
       image: item.image || item.img || "",
@@ -202,34 +184,66 @@
   }
 
 
+  let addonProducts = [];
+  let addonLoading = false;
+
+  async function loadAddonProducts() {
+    if (addonProducts.length || addonLoading || !window.CXProducts?.getPage) return;
+    addonLoading = true;
+    try {
+      // Fetch small catalogue batches until we find up to three accessories.
+      const found = [];
+      for (let offset = 0; offset < 96 && found.length < 3; offset += 12) {
+        const page = await window.CXProducts.getPage(offset, 12);
+        for (const p of page.products || []) {
+          const category = String(p.category || "").toLowerCase();
+          const words = `${p.title || ""} ${p.description || ""}`.toLowerCase();
+          const isAccessory = category.includes("accessor") ||
+            /handkerchief|hanky|perfume|fragrance|socks|cap|belt|wallet|watch|sunglass|bracelet/.test(words);
+          if (!isAccessory || p.available === false || !p.price) continue;
+          if (cart.some(x => x.productId === p.id || x.id === p.id)) continue;
+          found.push({
+            id: "bag-addon-" + p.id,
+            productId: p.id,
+            name: p.title,
+            image: p.image,
+            mrp: Number(p.mrp || p.price),
+            offerPrice: Math.max(1, Math.round(Number(p.price) * 0.90)),
+            category: "Accessories",
+            isAddon: true,
+            offerType: "one_time_bag_offer"
+          });
+          if (found.length >= 3) break;
+        }
+        if (!page.hasMore) break;
+      }
+      addonProducts = found;
+    } catch (err) {
+      console.warn("Bag accessories could not be loaded:", err);
+    } finally {
+      addonLoading = false;
+      renderAddons();
+    }
+  }
+
   function addAddon(addonId) {
-    const addon = CONFIG.addonOffers.find(
-      item => item.id === String(addonId) && item.active
-    );
-
+    const addon = addonProducts.find(item => item.id === String(addonId));
     if (!addon) {
-      showToast("Offer is no longer available", "error");
+      showToast("This accessory is not available right now.", "error");
       return false;
     }
-
-    const existing = findItem(addon.id);
-
-    if (existing) {
-      showToast("This item is already in your cart", "info");
+    if (findItem(addon.id)) {
+      showToast("This item is already in your bag.", "info");
       return false;
     }
-
     addItem({
       ...addon,
-      id: addon.id,
       name: addon.name,
-      mrp: addon.mrp,
       price: addon.offerPrice,
       offerPrice: addon.offerPrice,
       isAddon: true,
-      offerType: "checkout_addon"
+      offerType: "one_time_bag_offer"
     }, 1);
-
     return true;
   }
 
@@ -669,8 +683,7 @@
   ========================================================= */
 
   function getAvailableAddons() {
-    return CONFIG.addonOffers
-      .filter(addon => addon.active)
+    return addonProducts
       .filter(addon => !findItem(addon.id))
       .slice(0, CONFIG.maxAddonOffers);
   }
@@ -683,7 +696,7 @@
     );
 
     return `
-      <div class="addon-card" data-addon="${escapeHTML(addon.id)}">
+      <article class="addon-card" data-addon="${escapeHTML(addon.id)}">
 
         ${
           addon.image
@@ -715,7 +728,7 @@
           </div>
 
           <div class="addon-saving">
-            Save ${formatPrice(saving)}
+            One-time bag offer · Save ${formatPrice(saving)}
           </div>
 
         </div>
@@ -729,7 +742,7 @@
           + Add
         </button>
 
-      </div>
+      </article>
     `;
   }
 
@@ -741,27 +754,30 @@
 
     if (!container) return;
 
-    const available = getAvailableAddons();
-
-    if (cart.length === 0 || available.length === 0) {
+    if (cart.length === 0) {
       container.style.display = "none";
       return;
     }
 
     container.style.display = "";
+    if (!addonProducts.length) {
+      container.innerHTML = `<div class="addon-heading"><h3 class="addon-title">Complete your look</h3></div><p class="addon-subtitle">Checking the live accessories collection for a one-time bag offer…</p>`;
+      loadAddonProducts();
+      return;
+    }
 
+    const available = getAvailableAddons();
+    if (!available.length) {
+      container.style.display = "none";
+      return;
+    }
     container.innerHTML = `
       <div class="addon-heading">
-        <h3 class="addon-title">Add something extra</h3>
+        <span class="eyebrow">A little extra for your order</span>
+        <h3 class="addon-title">Accessories at a special bag price</h3>
       </div>
-
-      <p class="addon-subtitle">
-        Special prices on selected accessories
-      </p>
-
-      <div class="addon-list">
-        ${available.map(createAddonHTML).join("")}
-      </div>
+      <p class="addon-subtitle">Choose from accessories in our live catalogue. A temporary 10% bag offer is applied to these items only.</p>
+      <div class="addon-list">${available.map(createAddonHTML).join("")}</div>
     `;
   }
 
@@ -1034,8 +1050,6 @@
     cart = loadCart();
 
     initCartEvents();
-
-    initAddToCartButtons();
 
     renderCart();
 

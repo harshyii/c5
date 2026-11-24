@@ -32,18 +32,28 @@
 <label>PIN code<input name="pincode" inputmode="numeric" pattern="[1-9][0-9]{5}" autocomplete="postal-code" required></label>
 <label class="field-wide">Full address<textarea name="address" rows="3" autocomplete="street-address" required maxlength="500"></textarea></label>
 <label>City<input name="city" autocomplete="address-level2" required></label><label>State<input name="state" autocomplete="address-level1" required></label>
-</div><p class="checkout-privacy-note">Your details are used to process and deliver this order. See our <a href="privacy.html">Privacy Policy</a>.</p>
-<button class="btn btn-primary checkout-submit" id="cx-create-order" type="submit">Create order &amp; show payment QR</button><p class="checkout-status" id="cx-checkout-status" role="status" aria-live="polite"></p></form>
+</div><div class="checkout-methods" aria-labelledby="payment-method-heading">
+<h3 id="payment-method-heading">Choose how to pay</h3>
+<label class="payment-choice"><input type="radio" name="payment_method" value="PREPAID" checked><span><strong>Pay online (UPI)</strong><small>Pay the order total now. No COD surcharge.</small></span><b>Save 5% vs COD</b></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="PARTIAL_COD"><span><strong>Partial COD</strong><small>Pay ₹99 advance + ₹15 marketplace fee now; remaining balance on delivery.</small></span></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="COD"><span><strong>Cash on Delivery</strong><small>Pay the full amount to the courier. A 5% COD handling surcharge applies.</small></span><b>+5%</b></label>
+<p class="checkout-method-warning" id="cx-method-note">Pay online and avoid the 5% COD surcharge.</p>
+</div>
+<p class="checkout-privacy-note">Your details are used to process and deliver this order. See our <a href="privacy.html">Privacy Policy</a>.</p>
+<button class="btn btn-primary checkout-submit" id="cx-create-order" type="submit">Continue to payment</button><p class="checkout-status" id="cx-checkout-status" role="status" aria-live="polite"></p></form>
 <aside class="checkout-summary"><h2>Your order</h2><div id="cx-order-items" class="checkout-order-items"><p>Loading your bag…</p></div>
-<div class="checkout-total-row"><span>Subtotal</span><strong id="cx-subtotal">₹0</strong></div><div class="checkout-total-row"><span>Delivery</span><strong id="cx-delivery">₹0</strong></div><div class="checkout-total-row checkout-grand-total"><span>Total payable</span><strong id="cx-total">₹0</strong></div>
-<p class="checkout-payment-note">UPI payment. The QR code contains the exact payable amount.</p></aside></div></section>
+<div class="checkout-total-row"><span>Subtotal</span><strong id="cx-subtotal">₹0</strong></div><div class="checkout-total-row"><span>Delivery</span><strong id="cx-delivery">₹0</strong></div><div class="checkout-total-row"><span>Payment method charges</span><strong id="cx-method-fees">₹0</strong></div>
+<div class="checkout-total-row checkout-grand-total"><span>Order total</span><strong id="cx-total">₹0</strong></div>
+<div class="checkout-total-row" id="cx-pay-now-row"><span>Pay now</span><strong id="cx-pay-now">₹0</strong></div>
+<div class="checkout-total-row" id="cx-cod-balance-row" hidden><span>Balance due on delivery</span><strong id="cx-cod-balance">₹0</strong></div>
+<p class="checkout-payment-note" id="cx-payment-note">UPI payment. The QR code contains the exact payable amount.</p></aside></div></section>
 <section class="section checkout-payment-section" id="cx-payment-section" hidden><div class="container checkout-payment-card"><span class="eyebrow">UPI payment</span><h2>Scan to pay</h2>
 <p>Confirm the recipient and amount in your UPI app before authorising payment.</p><div class="checkout-qr-wrap"><img id="cx-upi-qr" alt="UPI payment QR code"><div><strong id="cx-qr-amount">₹0</strong><span>Exact order amount</span><small>UPI ID: 9050623210@sbi</small></div></div>
 <p class="checkout-order-reference">Order reference: <strong id="cx-order-id"></strong></p><a id="cx-upi-app-link" class="btn btn-primary" href="#">Pay with UPI app</a>
 <form id="cx-payment-proof-form" class="payment-proof-form"><h3>After completing payment</h3><p>Enter the UPI UTR / transaction reference from your payment app. This submits a payment claim for manual verification; it does not automatically mark the order as paid.</p>
 <label>UPI UTR / transaction reference<input name="utr" required minlength="8" maxlength="30" autocomplete="off"></label><button class="btn btn-primary" type="submit">Submit payment reference</button><p id="cx-proof-status" class="checkout-status" role="status" aria-live="polite"></p></form>
 </div></section>
-<section class="section checkout-thankyou" id="cx-thankyou" hidden><div class="container checkout-thankyou-card"><span class="thankyou-mark">✓</span><span class="eyebrow">ORDER RECEIVED</span><h2>Thank you. You're all set.</h2><p>Your order details and UTR have been submitted. Your payment will be verified before the order is processed for dispatch.</p><p class="checkout-order-reference">Order reference: <strong id="cx-thankyou-order"></strong></p><a href="shop.html" class="btn btn-primary">Continue shopping</a></div></section></main>
+<section class="section checkout-thankyou" id="cx-thankyou" hidden><div class="container checkout-thankyou-card"><span class="thankyou-mark">✓</span><span class="eyebrow">ORDER RECEIVED</span><h2>Thank you. You're all set.</h2><p id="cx-thankyou-copy">Your order has been received.</p><p class="checkout-order-reference">Order reference: <strong id="cx-thankyou-order"></strong></p><a href="shop.html" class="btn btn-primary">Continue shopping</a></div></section></main>
 <section class="newsletter"><span class="eyebrow">THE CLOTH X CLUB LETTER</span><h2>Good fits. No noise.</h2><p>Get occasional notes on new drops, styling ideas and what is happening at the club.</p><form data-newsletter-form><label class="sr-only" for="newsletter-email">Email address</label><input id="newsletter-email" type="email" placeholder="Your email address" required><button type="submit">Join the list</button></form></section>
 <footer class="site-footer"><div class="footer-main">
 <div><a class="brand-logo" href="index.html">CLOTH<span>X</span>CLUB</a><p>Everyday essentials, considered streetwear. Built around clean silhouettes, wearable colour and pieces that earn their place in your rotation.</p><p>clothxclub@gmail.com<br>+91 99915 03210</p></div>

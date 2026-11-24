@@ -1,42 +1,34 @@
-/* CLOTH X CLUB UPI checkout. Configure Apps Script URL below. */
+/* CLOTH X CLUB checkout — UPI prepaid, partial COD and COD */
 (()=>{"use strict";
-const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbwUCeTp-u165Q57Vu8aIQU_Q3RNmWx7gQopacwQH4YAyyVfWR0W61gCPoNfawkhqmpo/exec"};
-const $=s=>document.querySelector(s), money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(Number(n)||0);
+const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbwUCeTp-u165Q57Vu8aIQU_Q3RNmWx7gQopacwQH4YAyyVfWR0W61gCPoNfawkhqmpo/exec",partialAdvance:99,partialMarketplaceFee:15,codRate:.05};
+const $=s=>document.querySelector(s),money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(Number(n)||0);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const items=()=>window.CXCart?.getCart?.()||[], totals=()=>window.CXCart?.getTotals?.()||{};
-let order=null;
-function amounts(){let t=totals(),sub=Number(t.subtotal??t.subTotal??0),ship=Number(t.delivery??t.deliveryCharge??t.shipping??0);return{sub,ship,total:Number(t.total??t.grandTotal??sub+ship)}}
-function render(){let a=amounts(),list=items();$("#cx-order-items").innerHTML=list.length?list.map(x=>`<div class="checkout-line"><span>${esc(x.name)} × ${+x.quantity||1}${x.size?" · "+esc(x.size):""}${x.color?" · "+esc(x.color):""}</span><strong>${money((+x.price||0)*(+x.quantity||1))}</strong></div>`).join(""):"<p>Your bag is empty. <a href='shop.html'>Browse products</a>.</p>";$("#cx-subtotal").textContent=money(a.sub);$("#cx-delivery").textContent=money(a.ship);$("#cx-total").textContent=money(a.total);$("#cx-create-order").disabled=!list.length||a.total<=0}
-async function send(payload){
- if(!CFG.api.startsWith("https://script.google.com/macros/s/")||!CFG.api.endsWith("/exec"))throw Error("Order sheet connection is not configured.");
- const body=new URLSearchParams();
- Object.entries(payload).forEach(([k,v])=>body.set(k,typeof v==="string"?v:JSON.stringify(v)));
- // Apps Script web apps commonly redirect; no-cors permits a simple form POST
- // while deliberately not exposing the private sheet response to the browser.
- await fetch(CFG.api,{method:"POST",mode:"no-cors",body,redirect:"follow"});
+const items=()=>window.CXCart?.getCart?.()||[],totals=()=>window.CXCart?.getTotals?.()||{};
+let order=null,calc=null;
+function base(){const t=totals(),sub=Number(t.subtotal??0),delivery=Number(t.delivery??0);return{sub,delivery,baseTotal:sub+delivery}}
+function method(){return document.querySelector('input[name="payment_method"]:checked')?.value||"PREPAID"}
+function calculate(){const b=base(),m=method();let fees=0,total=b.baseTotal,payNow=total,codBalance=0,advance=0,marketplaceFee=0,codSurcharge=0;
+ if(m==="PARTIAL_COD"){advance=CFG.partialAdvance;marketplaceFee=CFG.partialMarketplaceFee;fees=marketplaceFee;total=b.baseTotal+marketplaceFee;payNow=advance+marketplaceFee;codBalance=Math.max(0,b.baseTotal-advance)}
+ if(m==="COD"){codSurcharge=Math.round(b.baseTotal*CFG.codRate*100)/100;fees=codSurcharge;total=b.baseTotal+codSurcharge;payNow=0;codBalance=total}
+ return{...b,method:m,fees,total,payNow,codBalance,advance,marketplaceFee,codSurcharge}}
+function render(){const list=items(),b=base();calc=calculate();$("#cx-order-items").innerHTML=list.length?list.map(x=>`<div class="checkout-line"><span>${esc(x.name)} × ${+x.quantity||1}${x.size?" · "+esc(x.size):""}${x.color?" · "+esc(x.color):""}</span><strong>${money((+x.price||0)*(+x.quantity||1))}</strong></div>`).join(""):"<p>Your bag is empty. <a href='shop.html'>Browse products</a>.</p>";
+ $("#cx-subtotal").textContent=money(b.sub);$("#cx-delivery").textContent=b.delivery?money(b.delivery):"FREE";$("#cx-method-fees").textContent=calc.fees?money(calc.fees):"₹0";$("#cx-total").textContent=money(calc.total);$("#cx-pay-now").textContent=money(calc.payNow);$("#cx-cod-balance").textContent=money(calc.codBalance);$("#cx-cod-balance-row").hidden=calc.method!=="PARTIAL_COD"&&calc.method!=="COD";$("#cx-pay-now-row").hidden=calc.method==="COD";
+ const note=$("#cx-method-note"),paymentNote=$("#cx-payment-note"),btn=$("#cx-create-order");
+ if(calc.method==="COD"){note.textContent="Cash on Delivery adds a 5% handling surcharge. Choose online payment to avoid this extra charge.";paymentNote.textContent="No online payment is required now. The full amount is payable to the courier.";btn.textContent="Place COD order"}
+ else if(calc.method==="PARTIAL_COD"){note.textContent="Pay ₹99 advance plus ₹15 marketplace fee now. The remaining balance is payable on delivery.";paymentNote.textContent="A QR code will be generated for ₹114. Pay it and submit the UTR to confirm your partial-COD order.";btn.textContent="Pay advance & place order"}
+ else{note.textContent="Pay online and avoid the 5% COD surcharge.";paymentNote.textContent="The QR code contains the exact prepaid amount.";btn.textContent="Continue to secure payment"}
+ btn.disabled=!list.length||calc.total<=0;
 }
+async function send(payload){if(!CFG.api.startsWith("https://script.google.com/macros/s/")||!CFG.api.endsWith("/exec"))throw Error("Order sheet connection is not configured.");const body=new URLSearchParams();Object.entries(payload).forEach(([k,v])=>body.set(k,typeof v==="string"?v:JSON.stringify(v)));await fetch(CFG.api,{method:"POST",mode:"no-cors",body,redirect:"follow"})}
 function orderRef(){return"CXC-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase()}
 function uri(id,amt){return"upi://pay?"+new URLSearchParams({pa:CFG.vpa,pn:CFG.payee,am:amt.toFixed(2),cu:"INR",tn:"CLOTH X CLUB "+id})}
-async function create(e){e.preventDefault();let form=$("#cx-checkout-form");if(!form.reportValidity())return;let a=amounts(),cart=items();if(!cart.length||a.total<=0)return;let id=orderRef(),payUri=uri(id,a.total),customer=Object.fromEntries(new FormData(form).entries()),btn=$("#cx-create-order");btn.disabled=true;btn.textContent="Creating order…";try{await send({action:"createOrder",orderId:id,createdAt:new Date().toISOString(),amount:a.total,subtotal:a.sub,delivery:a.ship,currency:"INR",customer,items:cart,status:"PAYMENT_PENDING"});order={id,amount:a.total};$("#cx-order-id").textContent=id;$("#cx-qr-amount").textContent=money(a.total);$("#cx-upi-qr").src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&data="+encodeURIComponent(payUri);$("#cx-upi-app-link").href=payUri;$("#cx-payment-section").hidden=false;$("#cx-payment-section").scrollIntoView({behavior:"smooth"});$("#cx-checkout-status").textContent="Order reference created. Pay using the QR, then submit your UTR for verification."}catch(err){$("#cx-checkout-status").textContent=err.message;btn.disabled=false;btn.textContent="Create order & show payment QR"}}
-async function proof(e){
- e.preventDefault();if(!order)return;
- let form=$("#cx-payment-proof-form");if(!form.reportValidity())return;
- let btn=form.querySelector("button");btn.disabled=true;
- try{
-  await send({action:"paymentProof",orderId:order.id,utr:new FormData(form).get("utr"),submittedAt:new Date().toISOString()});
-  $("#cx-proof-status").textContent="Your UTR has been submitted for verification.";
-  // Clear only after the customer submits the payment reference.
-  window.CXCart?.clear?.();
-  $("#cx-payment-section").hidden=true;
-  $("#cx-checkout-form").closest(".checkout-section").hidden=true;
-  $("#cx-thankyou-order").textContent=order.id;
-  $("#cx-thankyou").hidden=false;
-  $("#cx-thankyou").scrollIntoView({behavior:"smooth",block:"start"});
- }catch(err){
-  $("#cx-proof-status").textContent="We could not submit your UTR. Please retry. "+err.message;
-  btn.disabled=false;
- }
-}
-
-document.addEventListener("DOMContentLoaded",()=>{render();document.addEventListener("cx:cart-updated",render);$("#cx-checkout-form").addEventListener("submit",create);$("#cx-payment-proof-form").addEventListener("submit",proof)});
+function thankYou(id,message){window.CXCart?.clear?.();$("#cx-payment-section").hidden=true;$("#cx-checkout-form").closest(".checkout-section").hidden=true;$("#cx-thankyou-order").textContent=id;$("#cx-thankyou-copy").textContent=message;$("#cx-thankyou").hidden=false;$("#cx-thankyou").scrollIntoView({behavior:"smooth",block:"start"})}
+async function create(e){e.preventDefault();const form=$("#cx-checkout-form");if(!form.reportValidity())return;const cart=items();calc=calculate();if(!cart.length||calc.total<=0)return;const id=orderRef(),payUri=calc.payNow?uri(id,calc.payNow):"",customer=Object.fromEntries(new FormData(form).entries()),btn=$("#cx-create-order");btn.disabled=true;btn.textContent="Submitting order…";
+ try{await send({action:"createOrder",orderId:id,createdAt:new Date().toISOString(),amount:calc.total,subtotal:calc.sub,delivery:calc.delivery,currency:"INR",customer,items:cart,status:calc.method==="COD"?"COD_CONFIRMED":"PAYMENT_PENDING",paymentMethod:calc.method,advanceDue:calc.advance,paidNow:calc.payNow,codBalance:calc.codBalance,marketplaceFee:calc.marketplaceFee,codSurcharge:calc.codSurcharge});
+ order={id,amount:calc.total,method:calc.method};
+ if(calc.method==="COD"){thankYou(id,"Your Cash on Delivery order has been submitted. Please keep the total amount ready for the courier. The 5% COD handling surcharge is included in your order total.");return}
+ $("#cx-order-id").textContent=id;$("#cx-qr-amount").textContent=money(calc.payNow);$("#cx-upi-qr").src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=12&data="+encodeURIComponent(payUri);$("#cx-upi-app-link").href=payUri;$("#cx-upi-app-link").textContent="Pay "+money(calc.payNow)+" with UPI";$("#cx-payment-section").hidden=false;$("#cx-payment-section").scrollIntoView({behavior:"smooth"});$("#cx-checkout-status").textContent=calc.method==="PARTIAL_COD"?"Pay the ₹99 advance plus ₹15 marketplace fee. The remaining balance is payable on delivery.":"Order reference created. Pay using the QR, then submit your UTR for verification.";
+ }catch(err){$("#cx-checkout-status").textContent="We could not submit your order. Please retry. "+err.message;btn.disabled=false;render()}}
+async function proof(e){e.preventDefault();if(!order)return;const form=$("#cx-payment-proof-form");if(!form.reportValidity())return;const btn=form.querySelector("button");btn.disabled=true;try{await send({action:"paymentProof",orderId:order.id,utr:new FormData(form).get("utr"),submittedAt:new Date().toISOString()});thankYou(order.id,order.method==="PARTIAL_COD"?"Your partial-COD advance payment reference has been submitted for verification. The remaining balance is payable on delivery.":"Your UTR has been submitted for verification. Payment will be checked before dispatch.");}catch(err){$("#cx-proof-status").textContent="We could not submit your UTR. Please retry. "+err.message;btn.disabled=false}}
+document.addEventListener("DOMContentLoaded",()=>{render();document.addEventListener("cx:cart-updated",render);document.querySelectorAll('input[name="payment_method"]').forEach(x=>x.addEventListener("change",render));$("#cx-checkout-form")?.addEventListener("submit",create);$("#cx-payment-proof-form")?.addEventListener("submit",proof)});
 })();
