@@ -1,6 +1,6 @@
 /* CLOTH X CLUB checkout — UPI prepaid, partial COD and COD */
 (()=>{"use strict";
-const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbwUCeTp-u165Q57Vu8aIQU_Q3RNmWx7gQopacwQH4YAyyVfWR0W61gCPoNfawkhqmpo/exec",partialAdvance:99,partialMarketplaceFee:15,codRate:.05};
+const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbweD9Va5rP-qzxGo_s7KGoUry7xz37WvTPLLXyEmZddui3v97Rka1dYckb8G3wCEzFRsw/exec",partialAdvance:99,partialMarketplaceFee:15,codRate:.05};
 const $=s=>document.querySelector(s),money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(Number(n)||0);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const items=()=>window.CXCart?.getCart?.()||[],totals=()=>window.CXCart?.getTotals?.()||{};
