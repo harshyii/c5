@@ -1,0 +1,9 @@
+{
+  "builtAt": "2026-11-25T14:21:26.570Z",
+  "products": 61,
+  "blogs": 0,
+  "notes": [
+    "Basic build audit. Review product and blog metadata, image URLs and internal links manually.",
+    "Orders and checkout endpoints are not queried or exported."
+  ]
+}
