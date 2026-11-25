@@ -1,6 +1,6 @@
 /* CLOTH X CLUB checkout — Razorpay + UPI UTR + COD */
 (()=>{"use strict";
-const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbzvp-hnBhaYw-65VBfCAsAnp5hRd2xnLEMyqtQhV1QxYywlFu5_BRRUpbKjTRnxDOaAsA/exec",partialRate:.02,partialPlatformFee:5,razorpayRate:.02,freeDeliveryThreshold:1500};
+const CFG={vpa:"9050623210@sbi",payee:"CLOTH X CLUB",api:"https://script.google.com/macros/s/AKfycbwi1H1cV_Wa0SUzv2fTNCTeNOvkvke_y74RLzqrdWjdMPK9fVKx14FqTvK_GsZ7ld_MzA/exec",partialRate:.02,partialPlatformFee:5,razorpayRate:.02,freeDeliveryThreshold:1500};
 const $=s=>document.querySelector(s),money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:2}).format(Number(n)||0);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const items=()=>window.CXCart?.getCart?.()||[],totals=()=>window.CXCart?.getTotals?.()||{};
