@@ -373,7 +373,7 @@
           return;
         }
 
-        const endpoint = "https://script.google.com/macros/s/AKfycbwUCeTp-u165Q57Vu8aIQU_Q3RNmWx7gQopacwQH4YAyyVfWR0W61gCPoNfawkhqmpo/exec";
+        const endpoint = "https://script.google.com/macros/s/AKfycbzvp-hnBhaYw-65VBfCAsAnp5hRd2xnLEMyqtQhV1QxYywlFu5_BRRUpbKjTRnxDOaAsA/exec";
         const submit = $("button[type='submit']", form);
         if (submit) { submit.disabled = true; submit.textContent = "Joining…"; }
         const body = new URLSearchParams({

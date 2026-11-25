@@ -23,7 +23,7 @@
 <nav class="mobile-menu" id="mobile-menu" data-mobile-menu aria-label="Mobile navigation" aria-hidden="true"><a href="index.html">Home</a><a href="shop.html">Shop all</a><a href="blog.html">Journal</a><a href="info.html">About & Support</a><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a></nav>
 
 <main id="main-content">
-<section class="page-hero"><div class="container"><span class="eyebrow">Secure order</span><h1>Checkout.</h1><p>Confirm your delivery details and scan the UPI QR code to pay the exact order amount.</p></div></section>
+<section class="page-hero"><div class="container"><span class="eyebrow">Secure order</span><h1>Checkout.</h1><p>Confirm your delivery details and select a payment method. Direct UPI has no payment fee.</p></div></section>
 <section class="section checkout-section"><div class="container checkout-layout">
 <form class="checkout-form" id="cx-checkout-form"><h2>Delivery details</h2><div class="checkout-fields">
 <label>Full name<input name="customer_name" autocomplete="name" required maxlength="100"></label>
@@ -34,15 +34,16 @@
 <label>City<input name="city" autocomplete="address-level2" required></label><label>State<input name="state" autocomplete="address-level1" required></label>
 </div><div class="checkout-methods" aria-labelledby="payment-method-heading">
 <h3 id="payment-method-heading">Choose how to pay</h3>
-<label class="payment-choice"><input type="radio" name="payment_method" value="PREPAID" checked><span><strong>Pay online (UPI)</strong><small>Pay the order total now. No COD surcharge.</small></span><b>Save 5% vs COD</b></label>
-<label class="payment-choice"><input type="radio" name="payment_method" value="PARTIAL_COD"><span><strong>Partial COD</strong><small>Pay ₹99 advance + ₹15 marketplace fee now; remaining balance on delivery.</small></span></label>
-<label class="payment-choice"><input type="radio" name="payment_method" value="COD"><span><strong>Cash on Delivery</strong><small>Pay the full amount to the courier. A 5% COD handling surcharge applies.</small></span><b>+5%</b></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="RAZORPAY"><span><strong>Razorpay (UPI, cards &amp; more)</strong><small>2% fee on product subtotal. 2% fee on product subtotal.</small></span></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="PREPAID" checked><span><strong>Direct UPI</strong><small>No payment fee. Pay using UPI QR.</small></span></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="PARTIAL_COD"><span><strong>Partial COD</strong><small>Pay advance + 2% of product subtotal + ₹5 platform fee now; balance on delivery.</small></span></label>
+<label class="payment-choice"><input type="radio" name="payment_method" value="COD"><span><strong>Cash on Delivery</strong><small>Pay the order amount to the courier. No COD surcharge.</small></span></label>
 <p class="checkout-method-warning" id="cx-method-note">Pay online and avoid the 5% COD surcharge.</p>
 </div>
 <p class="checkout-privacy-note">Your details are used to process and deliver this order. See our <a href="privacy.html">Privacy Policy</a>.</p>
 <button class="btn btn-primary checkout-submit" id="cx-create-order" type="submit">Continue to payment</button><p class="checkout-status" id="cx-checkout-status" role="status" aria-live="polite"></p></form>
 <aside class="checkout-summary"><h2>Your order</h2><div id="cx-order-items" class="checkout-order-items"><p>Loading your bag…</p></div>
-<div class="checkout-total-row"><span>Subtotal</span><strong id="cx-subtotal">₹0</strong></div><div class="checkout-total-row"><span>Delivery</span><strong id="cx-delivery">₹0</strong></div><div class="checkout-total-row"><span>Payment method charges</span><strong id="cx-method-fees">₹0</strong></div>
+<div class="checkout-total-row"><span>Subtotal</span><strong id="cx-subtotal">₹0</strong></div><div class="checkout-total-row"><span>Delivery</span><strong id="cx-delivery">₹0</strong></div><div class="checkout-total-row"><span>Payment / platform fees</span><strong id="cx-method-fees">₹0</strong></div>
 <div class="checkout-total-row checkout-grand-total"><span>Order total</span><strong id="cx-total">₹0</strong></div>
 <div class="checkout-total-row" id="cx-pay-now-row"><span>Pay now</span><strong id="cx-pay-now">₹0</strong></div>
 <div class="checkout-total-row" id="cx-cod-balance-row" hidden><span>Balance due on delivery</span><strong id="cx-cod-balance">₹0</strong></div>
@@ -62,5 +63,6 @@
 <div class="footer-column"><h3>Information</h3><a href="info.html">About CLOTH X CLUB</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms & conditions</a></div>
 </div><div class="footer-bottom"><span>© <span data-current-year>2026</span> CLOTH X CLUB. All rights reserved.</span><span>Operated as a proprietorship · Pehowa, Haryana, India</span></div></footer>
 <script>document.querySelectorAll('[data-current-year]').forEach(e=>e.textContent=new Date().getFullYear());</script>
-<script src="js/app.js" defer></script><script src="js/cart.js" defer></script><script src="js/checkout.js" defer></script>
+<script src="js/app.js" defer></script><script src="js/cart.js" defer></script><script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/checkout.js" defer></script>
 </body></html>

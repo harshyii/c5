@@ -15,7 +15,7 @@
 
     currency: "INR",
 
-    freeDeliveryThreshold: 1499,
+    freeDeliveryThreshold: 1500,
 
     // CHANGE THIS TO YOUR ACTUAL DELIVERY FEE
     deliveryCharge: 99,
