@@ -1,0 +1,30 @@
+name: CLOTH X CLUB SEO build
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**'
+      - 'scripts/**'
+      - 'data/**'
+      - '.github/workflows/seo-build.yml'
+      - 'js/products.js'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build product and blog pages
+        run: node scripts/build-seo-pages.mjs
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add products journal sitemap.xml SEO_AUDIT.json
+          git diff --cached --quiet || git commit -m "SEO build: refresh generated pages"
+          git push
