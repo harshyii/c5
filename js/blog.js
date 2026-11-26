@@ -14,8 +14,10 @@
     postsPaths: [
       "Layout/data/posts.json",
       "data/posts.json",
+      "data/blog-index.json",
       "./Layout/data/posts.json",
-      "./data/posts.json"
+      "./data/posts.json",
+      "./data/blog-index.json"
     ],
 
     postsPerPage: 6,

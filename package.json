@@ -1,0 +1,12 @@
+{
+  "name": "clothxclub-publishing-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "marked": "^15.0.7"
+  }
+}

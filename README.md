@@ -1,156 +1,60 @@
+# CLOTH X CLUB — integrated source + publishing engine
 
-# CLOTH X CLUB
+## Included
+- Original storefront functionality, checkout, Razorpay client integration, cart, wishlist, product/shop/blog templates and assets.
+- Node.js publishing engine.
+- Markdown blog publishing at `content/blog/*.md`.
+- Automatic product-page generation from the existing Google Sheets product feed.
+- Automatic sitemap and robots.txt generation.
+- Blog index JSON and SEO audit summary.
+- GitHub Actions workflow to build and deploy.
 
-### Contemporary Streetwear & Everyday Essentials
+## Local build
+1. Install Node.js 20 or newer.
+2. Run `npm install`.
+3. Run `npm run build`.
 
-**CLOTH X CLUB** is a fashion and clothing e-commerce project focused on contemporary streetwear, everyday essentials and wearable styles.
+The build fetches live catalog data from the configured product feed. Set `PRODUCTS_API` to override the feed and `SITE_URL` to override the base URL.
 
-The project brings a modern online shopping experience to a clothing retail business, combining product discovery, category-based browsing, shopping functionality and fashion-related content in one platform.
+## Blog publishing
+Add a Markdown file in `content/blog/` with frontmatter:
 
-🌐 **Live Website:** https://harshyii.github.io/c5/index.html
-
+```md
+---
+title: "Article title"
+slug: "article-slug"
+description: "Search description"
+date: "2026-11-25"
+author: "CLOTH X CLUB"
+published: true
+featured_image: ""
 ---
 
-## About CLOTH X CLUB
+# Article title
 
-CLOTH X CLUB is built around a simple idea:
+Article text and Markdown links.
+```
 
-**Good fits. No noise.**
+A push to `main` triggers the build/deployment workflow.
 
-We focus on everyday clothing, clean silhouettes, wearable colours and practical fashion essentials.
+## Security
+Do not put Razorpay secret keys, customer data or orders into this repository. The existing Razorpay flow is retained as client integration; order creation and payment verification must be performed by the existing server-side Apps Script with secrets in Script Properties. Rotate any previously exposed secret.
 
-The website is designed to make discovering and shopping for clothing simple, convenient and accessible across devices.
+## Publishing/build engine
 
-The business operates from Pehowa, Haryana, India.
+- Node.js 20+ required.
+- `npm install` installs the Markdown renderer.
+- `npm run build` fetches the catalog in batches, generates product pages under `products/`, generates published Markdown articles under `journal/`, updates `data/blog-index.json`, `sitemap.xml`, `robots.txt`, and `SEO_AUDIT.json`.
+- Blog source: `content/blog/*.md`. Use YAML-style frontmatter with `title`, `slug`, `description`, `date`, `published`, `featured_image`, and `author`.
+- Internal links: `data/internal-links.csv` columns `Source_Slug,Target_Slug,Anchor_Text,Status`. Rules are applied to the matching article's rendered text; review anchor placement after builds.
+- GitHub workflow builds and deploys a Pages artifact. It does not commit generated files or push back to `main`, avoiding bot/user push conflicts.
+- In GitHub repository Settings → Pages, select **GitHub Actions** as the deployment source.
+- Set repository variable `PRODUCTS_API` (Settings → Secrets and variables → Actions → Variables) to the product feed URL. The build has a fallback configured.
 
----
+## Razorpay / checkout
 
-## Website Features
+The storefront's existing checkout uses the configured Apps Script orders/payment endpoint for create-order and payment verification actions. Razorpay order creation and signature verification must happen on that trusted server-side endpoint; the browser must never contain a Razorpay secret. Set secret credentials only in Apps Script Script Properties or your trusted backend. Rotate credentials that were previously exposed. Test using Razorpay test mode and the backend's verification flow before live payments.
 
-### 🛍️ Online Shopping
-- Dedicated shopping and product catalogue pages.
-- Browse products across available categories.
-- Product listings connected to the live product catalogue.
-- Individual product detail pages.
-- Product images, galleries, sizes and colour information where available.
-- Search and product discovery.
+## Build validation
 
-### 🛒 Shopping Experience
-- Shopping cart functionality.
-- Dedicated checkout page.
-- Wishlist functionality.
-- Responsive navigation and shopping interface.
-
-### 👕 Product Categories
-- Men's clothing and everyday essentials.
-- T-shirts and casual wear.
-- Fashion accessories.
-- Additional clothing collections as available in the catalogue.
-
-### 📰 Style Journal
-- Fashion-related articles and editorial content.
-- Style inspiration and clothing-related information.
-- Dedicated journal and article pages.
-
-### 📦 Customer Information
-- Shipping information.
-- Returns and refunds information.
-- Privacy policy.
-- Terms and conditions.
-- Frequently asked questions.
-- Contact and customer support information.
-- Grievance redressal information.
-
-### ✉️ Newsletter
-- Email newsletter subscription interface.
-- Updates about new collections, styling ideas and store announcements.
-
-### 📱 Responsive Design
-- Designed for desktop, tablet and mobile browsing.
-- Mobile-friendly shopping experience.
-- Simple navigation and product discovery.
-
----
-
-## Delivery Information
-
-The website currently displays:
-
-**Free delivery on eligible orders above ₹1,499 in India.**
-
-Please refer to the website's shipping policy for applicable conditions.
-
----
-
-## Website Structure
-
-The project uses a multi-page website architecture.
-
-| File / Directory | Purpose |
-|---|---|
-| `index.html` | Homepage |
-| `shop.html` | Product catalogue |
-| `product.html` | Product details |
-| `cart.html` | Shopping cart |
-| `checkout.html` | Checkout |
-| `wishlist.html` | Wishlist |
-| `blog.html` | Style journal |
-| `article.html` | Individual articles |
-| `info.html` | Information and support |
-| `shipping.html` | Shipping policy |
-| `returns.html` | Returns and refunds |
-| `privacy.html` | Privacy policy |
-| `terms.html` | Terms and conditions |
-| `css/` | Website stylesheets |
-| `js/` | JavaScript functionality |
-| `Layout/data/` | Supporting layout and data assets |
-
----
-
-## Technology & Development
-
-The project is organised around a lightweight web frontend with separate HTML pages, CSS stylesheets and JavaScript assets.
-
-The development approach focuses on:
-
-- A straightforward website architecture.
-- Reusable frontend assets.
-- Product catalogue integration.
-- Shopping and cart functionality.
-- Mobile-first usability.
-- Maintainable website structure.
-
----
-
-## Project Links
-
-| Resource | Link |
-|---|---|
-| Live Website | https://harshyii.github.io/c5/index.html |
-| GitHub Repository | https://github.com/harshyii/c5 |
-| CLOTH X CLUB | https://harshyii.github.io/c5/index.html |
-| CLOTH X CLUB Membership forum link | https://forms.gle/YoxPJcvypTa7JFQi7
-| CLOTH X CLUB E-Book | https://drive.google.com/file/d/1pJ2JQTq3hLj0Ht8tdrptuIX0dOPE9NqJ/view?usp=drive_link
----
-
-## Business Information
-
-**Brand:** CLOTH X CLUB  
-**Business Location:** Pehowa, Haryana, India  
-**Business Type:** Clothing & Fashion Retail  
-**Email:** clothxclub@gmail.com  
-**Contact:** +91 99915 03210
-
----
-
-## Project Purpose
-
-CLOTH X CLUB represents an effort to bring a traditional clothing retail business into the digital space.
-
-The project combines retail operations with e-commerce development to create an accessible online storefront and improve how customers discover and shop for clothing.
-
-We are continuously working on improving the shopping experience, product catalogue and website functionality.
-
----
-
-**CLOTH X CLUB — Good fits. No noise.**
+Run locally: `npm install && npm run build`. The script fails if the catalog API fails and writes an SEO audit JSON report on successful generation. Deployment is not payment verification testing; complete checkout test orders separately.
