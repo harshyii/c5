@@ -1,9 +1,10 @@
 {
-  "builtAt": "2026-11-25T14:21:26.570Z",
+  "builtAt": "2026-11-27T16:16:45.561Z",
   "products": 61,
-  "blogs": 0,
-  "notes": [
-    "Basic build audit. Review product and blog metadata, image URLs and internal links manually.",
-    "Orders and checkout endpoints are not queried or exported."
-  ]
+  "blogs": 20,
+  "issues": [],
+  "warnings": [],
+  "productApi": "https://script.google.com/macros/s/AKfycbwedB2j2FwFYJoDQzjowsxCLmnIYf_jjLCwNkvZeBYjrUhX4Wks9c1r4_Rg9TuDj-9G/exec",
+  "sitemapUrls": 155,
+  "internalLinkRules": 0
 }
