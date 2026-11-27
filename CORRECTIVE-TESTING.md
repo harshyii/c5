@@ -1,24 +1,13 @@
-# Corrective build test instructions
+# Corrected product URL and Merchant Center checks
+
+## Product URL format
+Use the existing working product URL format:
+`https://harshyii.github.io/c5/product.html?id=PRODUCT_ID`
+
+The publishing builder no longer creates or recommends `/products/<slug>/` product routes. It generates crawler/share metadata pages at `/share/<product-id>/`, which redirect human visitors to the existing `product.html?id=...` page.
 
 ## Build
-Run in PowerShell:
-```powershell
-npm.cmd install
-npm.cmd run build
-npm.cmd run smoke
-```
+Run `npm install` and `npm run build`. The builder fetches the catalog and refreshes `data/products-cache.json`; if the live API is unavailable, it uses a non-empty cache. If both fail, the build stops rather than generating a partial catalog/sitemap.
 
-## Confirm More to explore
-Open a generated product URL (not the legacy `product.html?id=...` URL). The generated page should have a directly rendered related-card grid. Check view-source for `id="more-to-explore"` and inspect the card markup.
-
-## Social previews
-Share ONLY generated product URLs in the form `/products/product-slug-id/`. The old query URL `/product.html?id=...` is a single generic HTML document and social crawlers cannot execute the site's JavaScript to infer the product metadata. Generated pages contain product-specific title, description, canonical, OG and Twitter tags plus JSON-LD.
-After deployment, use the Facebook Sharing Debugger and request a re-scrape. GitHub Pages deployment must include the generated folder tree.
-
-## Newsletter
-The frontend now requires an explicit JSON success response rather than treating a no-CORS opaque response as success. If the endpoint response is not CORS-readable or lacks a success field, signup will visibly fail instead of showing false success. The Apps Script endpoint needs to return JSON such as `{"success":true}` and support the form POST. The newsletter script URL in `js/app.js` must be verified against the deployed script and its sheet/tab. No subscription is claimed successful without confirmation.
-
-## Product link changes
-Homepage/shop cards now point to generated clean product URLs. Verify in the deployed build. Legacy query URL remains for compatibility but is not the preferred sharing URL.
-
-This package cannot guarantee a social crawler preview until deployed and re-scraped; GitHub Pages hosting cannot provide server-side dynamic metadata for query-parameter product pages.
+## Merchant Center
+Confirm each product's feed link uses the query URL format above and that product ID is encoded. Open a feed link in a browser, add the product to bag, and proceed through checkout. Verify price, availability, shipping, and delivery match Merchant Center settings.

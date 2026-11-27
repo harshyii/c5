@@ -44,7 +44,7 @@ Do not put Razorpay secret keys, customer data or orders into this repository. T
 
 - Node.js 20+ required.
 - `npm install` installs the Markdown renderer.
-- `npm run build` fetches the catalog in batches, generates product pages under `products/`, generates published Markdown articles under `journal/`, updates `data/blog-index.json`, `sitemap.xml`, `robots.txt`, and `SEO_AUDIT.json`.
+- `npm run build` fetches the catalog in batches, generates product share/preview pages under `share/` (while preserving the live `product.html?id=...` product URL), generates published Markdown articles under `journal/`, updates `data/blog-index.json`, `sitemap.xml`, `robots.txt`, and `SEO_AUDIT.json`.
 - Blog source: `content/blog/*.md`. Use YAML-style frontmatter with `title`, `slug`, `description`, `date`, `published`, `featured_image`, and `author`.
 - Internal links: `data/internal-links.csv` columns `Source_Slug,Target_Slug,Anchor_Text,Status`. Rules are applied to the matching article's rendered text; review anchor placement after builds.
 - GitHub workflow builds and deploys a Pages artifact. It does not commit generated files or push back to `main`, avoiding bot/user push conflicts.
