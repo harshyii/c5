@@ -101,7 +101,7 @@
         availability: p.available === false
           ? "https://schema.org/OutOfStock"
           : "https://schema.org/InStock",
-        url: location.href
+        url: `${location.origin}${location.pathname.substring(0,location.pathname.lastIndexOf('/')+1)}share/${String(product.id).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}/`
       }
     });
   }
@@ -296,6 +296,31 @@
     }
   }
 
+
+  async function renderRelatedProducts(current) {
+    const container = $("[data-related-products]");
+    if (!container || !window.CXProducts?.getAll) return;
+    container.innerHTML = '<p>Loading more products…</p>';
+    try {
+      const items = await window.CXProducts.getAll({pageSize:48});
+      const others = items.filter(x => String(x.id)!==String(current.id) && x.title);
+      const same = others.filter(x => String(x.category||"").toLowerCase()===String(current.category||"").toLowerCase() && current.category);
+      const chosen = (same.length>=4 ? same : others).slice(0,4);
+      container.innerHTML = chosen.map(x => {
+        const url = `product.html?id=${encodeURIComponent(x.id)}`;
+        const image = x.image||x.images?.[0]||"";
+        return `<article class="product-card" style="display:block;visibility:visible">
+          <a href="${esc(url)}" style="color:inherit;text-decoration:none">
+          ${image?`<img src="${esc(image)}" alt="${esc(x.title)}" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover">`:""}
+          <h3>${esc(x.title)}</h3></a><p>${money(x.price)}</p><a href="${esc(url)}">View product</a></article>`;
+      }).join("");
+      if (!chosen.length) container.innerHTML="<p>Explore the shop for more everyday essentials.</p>";
+    } catch(e) {
+      console.error("Related product rendering failed",e);
+      container.innerHTML='<p><a href="shop.html">Explore the shop</a></p>';
+    }
+  }
+
   /* ---------- INITIALIZATION ---------- */
 
   document.addEventListener("DOMContentLoaded", async () => {
@@ -325,6 +350,7 @@
       }
 
       show(loadedProduct);
+      renderRelatedProducts(loadedProduct);
 
     } catch (error) {
       console.error("Product loading failed:", error);
@@ -385,21 +411,21 @@
         const shareData = {
           title: document.title,
           text: `Take a look at ${product.title} from CLOTH X CLUB`,
-          url: location.href
+          url: `${location.origin}${location.pathname.substring(0,location.pathname.lastIndexOf('/')+1)}share/${String(product.id).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}/`
         };
 
         try {
           if (navigator.share) {
             await navigator.share(shareData);
           } else if (navigator.clipboard?.writeText) {
-            await navigator.clipboard.writeText(location.href);
+            await navigator.clipboard.writeText(shareData.url);
 
             window.CXClub?.showToast?.(
               "Product link copied.",
               "success"
             );
           } else {
-            window.prompt("Copy this product link:", location.href);
+            window.prompt("Copy this product link:", shareData.url);
           }
 
         } catch (error) {

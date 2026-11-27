@@ -382,12 +382,24 @@
           source: location.pathname,
           subscribedAt: new Date().toISOString()
         });
-        fetch(endpoint, { method: "POST", mode: "no-cors", body })
-          .then(() => {
-            showToast("Thank you. You've joined the CLOTH X CLUB letter.", "success");
-            form.reset();
+        fetch(endpoint, { method: "POST", body })
+          .then(async response => {
+            if (!response.ok) throw new Error("Newsletter endpoint returned HTTP " + response.status);
+            const text = await response.text();
+            let result = null;
+            try { result = JSON.parse(text); } catch {}
+            // Never claim that a subscription was saved unless the endpoint explicitly confirms it.
+            if (result && (result.success === true || result.status === "success" || result.ok === true)) {
+              showToast("Thank you. You've joined the CLOTH X CLUB letter.", "success");
+              form.reset();
+            } else {
+              throw new Error("The endpoint did not return an explicit success response.");
+            }
           })
-          .catch(() => showToast("We could not save your subscription. Please try again.", "error"))
+          .catch(error => {
+            console.error("Newsletter signup failed:", error);
+            showToast("We couldn't confirm your subscription. Please try again.", "error");
+          })
           .finally(() => {
             if (submit) { submit.disabled = false; submit.textContent = "Join the list"; }
           });
