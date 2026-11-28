@@ -2,7 +2,9 @@
 title: "Streetwear Outfit Ideas for Men in India"
 slug: "streetwear-outfit-ideas-men-india"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85"
+description: "Streetwear in India needs to work with local weather, daily movement and practical comfort. Fabric choice and outfit layering should respond to the season."---
 
 # Streetwear Outfit Ideas for Men in India
 

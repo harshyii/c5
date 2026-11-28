@@ -2,7 +2,9 @@
 title: "Streetwear Essentials Every Wardrobe Needs"
 slug: "streetwear-essentials-every-wardrobe-needs"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85"
+description: "A useful streetwear wardrobe is built around repeatable silhouettes, dependable fabric and pieces that work together—not a pile of trend items."---
 
 # Streetwear Essentials Every Wardrobe Needs
 

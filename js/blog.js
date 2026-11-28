@@ -12,11 +12,7 @@
 
   const BLOG_CONFIG = {
     postsPaths: [
-      "Layout/data/posts.json",
-      "data/posts.json",
       "data/blog-index.json",
-      "./Layout/data/posts.json",
-      "./data/posts.json",
       "./data/blog-index.json"
     ],
 
@@ -215,7 +211,7 @@
   ========================================================= */
 
   function getPostURL(post) {
-    return `article.html?slug=${encodeURIComponent(post.slug)}`;
+    return `journal/${encodeURIComponent(post.slug)}/`;
   }
 
 
@@ -225,11 +221,7 @@
 
   function getImageHTML(image, alt, className = "") {
     if (!image) {
-      return `
-        <div class="blog-image-placeholder ${className}">
-          <span>CLOTH X CLUB</span>
-        </div>
-      `;
+      return `<div class="blog-image-placeholder ${className}" aria-label="${escapeHTML(alt)}"><span>Image unavailable</span></div>`;
     }
 
     return `
@@ -238,7 +230,8 @@
         src="${escapeHTML(image)}"
         alt="${escapeHTML(alt)}"
         loading="lazy"
-        onerror="this.style.display='none'"
+        decoding="async"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85'"
       >
     `;
   }

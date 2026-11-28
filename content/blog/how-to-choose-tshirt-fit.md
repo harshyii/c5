@@ -2,7 +2,9 @@
 title: "How to Choose the Right T-Shirt Fit"
 slug: "how-to-choose-tshirt-fit"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85"
+description: "Choosing a T-shirt fit involves measuring, considering movement and evaluating how the garment sits—not guessing from a size label."---
 
 # How to Choose the Right T-Shirt Fit
 

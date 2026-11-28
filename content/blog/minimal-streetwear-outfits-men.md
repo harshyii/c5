@@ -2,7 +2,9 @@
 title: "Minimal Streetwear Outfits for Men"
 slug: "minimal-streetwear-outfits-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78?auto=format&fit=crop&w=1200&q=85"
+description: "Minimal streetwear uses restrained colour, clean silhouettes and detail rather than excessive decoration."---
 
 # Minimal Streetwear Outfits for Men
 

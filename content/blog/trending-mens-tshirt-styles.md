@@ -2,7 +2,9 @@
 title: "Men’s T-Shirt Styles: Silhouettes and Details to Know"
 slug: "trending-mens-tshirt-styles"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85"
+description: "T-shirt trends change, but understanding silhouettes and construction helps you choose styles that suit you beyond a single season."---
 
 # Men’s T-Shirt Styles: Silhouettes and Details to Know
 

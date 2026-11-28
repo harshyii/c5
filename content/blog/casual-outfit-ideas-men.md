@@ -2,7 +2,9 @@
 title: "Casual Outfit Ideas for Men: Practical Combinations"
 slug: "casual-outfit-ideas-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85"
+description: "Casual dressing works best when garments are comfortable, coordinated and suitable for the activity."---
 
 # Casual Outfit Ideas for Men: Practical Combinations
 

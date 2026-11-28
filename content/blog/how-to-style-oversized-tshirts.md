@@ -2,7 +2,9 @@
 title: "How to Style Oversized T-Shirts: A Garment-Maker’s Guide"
 slug: "how-to-style-oversized-tshirts"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1518640467707-6811f5a75f2f?auto=format&fit=crop&w=1200&q=85"
+description: "Oversized tees are not simply regular T-shirts made larger. Their shoulder, body, sleeve, length and drape need to work together. This guide explains how to style them and what to look for in construction."---
 
 # How to Style Oversized T-Shirts: A Garment-Maker’s Guide
 

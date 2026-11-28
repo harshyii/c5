@@ -2,7 +2,9 @@
 title: "Black T-Shirt Outfit Ideas for Men"
 slug: "black-tshirt-outfit-ideas-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78?auto=format&fit=crop&w=1200&q=85"
+description: "A black T-shirt is a wardrobe anchor. The shade, fabric surface, fit and finishing determine whether it reads minimal, sporty or streetwear-focused."---
 
 # Black T-Shirt Outfit Ideas for Men
 

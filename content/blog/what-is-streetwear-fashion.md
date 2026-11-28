@@ -2,7 +2,9 @@
 title: "What Is Streetwear Fashion? A Practical Introduction"
 slug: "what-is-streetwear-fashion"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85"
+description: "Streetwear blends casual clothing, community influences, graphic expression and evolving silhouettes. Its defining elements vary by culture and period."---
 
 # What Is Streetwear Fashion? A Practical Introduction
 

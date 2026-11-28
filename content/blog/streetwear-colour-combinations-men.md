@@ -2,7 +2,9 @@
 title: "Streetwear Colour Combinations for Men"
 slug: "streetwear-colour-combinations-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78?auto=format&fit=crop&w=1200&q=85"
+description: "Colour coordination can make streetwear outfits feel cohesive. Start with a simple palette and use contrast intentionally."---
 
 # Streetwear Colour Combinations for Men
 

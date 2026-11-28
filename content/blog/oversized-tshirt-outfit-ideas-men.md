@@ -2,7 +2,9 @@
 title: "Oversized T-Shirt Outfit Ideas for Men"
 slug: "oversized-tshirt-outfit-ideas-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85"
+description: "The best oversized-T-shirt outfits use proportion, texture and colour rather than relying on size alone."---
 
 # Oversized T-Shirt Outfit Ideas for Men
 

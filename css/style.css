@@ -266,3 +266,6 @@
 }
 
 .cx-skeleton-product{min-width:0}.skeleton-card{width:100%;aspect-ratio:3/4;background:linear-gradient(100deg,#f0f0ee 20%,#fafaf8 40%,#f0f0ee 60%);background-size:200% 100%;animation:cx-shimmer 1.25s infinite}.skeleton-line{height:10px;margin-top:10px;background:#eee}.skeleton-line.short{width:58%}.product-skeleton{min-height:280px;aspect-ratio:4/5;background:linear-gradient(100deg,#f0f0ee 20%,#fafaf8 40%,#f0f0ee 60%);background-size:200% 100%;animation:cx-shimmer 1.25s infinite}.product-share-btn{grid-column:1/-1}
+
+/* Journal cards and article images: responsive editorial treatment */
+.blog-card-image img,.featured-blog-image img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#eee;transition:transform .25s ease}.blog-card-image{display:block;overflow:hidden}.blog-card-image img:hover{transform:scale(1.025)}.blog-card{min-width:0}.blog-card-content{padding-top:12px}.cx-journal-article{max-width:860px;margin:30px auto}.cx-journal-hero{display:block;width:100%;max-height:640px;aspect-ratio:16/9;object-fit:cover;margin:24px 0 36px}.article-body{font-size:1.05rem;line-height:1.8}.article-body h2,.article-body h3{margin-top:2.2em}.blog-image-placeholder{aspect-ratio:4/3;background:#eee;display:flex;align-items:center;justify-content:center}

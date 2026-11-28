@@ -2,7 +2,9 @@
 title: "The Complete Guide to Oversized T-Shirts for Men"
 slug: "oversized-tshirts-men-guide"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85"
+description: "An oversized T-shirt is a designed fit—not a size mistake. Its proportions, fabric and construction determine whether it looks relaxed or simply too large."---
 
 # The Complete Guide to Oversized T-Shirts for Men
 

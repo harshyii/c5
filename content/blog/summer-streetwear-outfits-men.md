@@ -2,7 +2,9 @@
 title: "Summer Streetwear Outfits for Men"
 slug: "summer-streetwear-outfits-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85"
+description: "Summer streetwear combines light layers, breathable fabrics and practical silhouettes for warm conditions."---
 
 # Summer Streetwear Outfits for Men
 

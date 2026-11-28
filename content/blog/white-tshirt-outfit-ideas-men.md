@@ -2,7 +2,9 @@
 title: "White T-Shirt Outfit Ideas for Men"
 slug: "white-tshirt-outfit-ideas-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85"
+description: "The white tee is simple but revealing: fabric opacity, collar construction, fit and finishing are especially noticeable."---
 
 # White T-Shirt Outfit Ideas for Men
 

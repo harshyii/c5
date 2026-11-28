@@ -2,7 +2,9 @@
 title: "How to Match T-Shirts with Sneakers"
 slug: "tshirt-sneaker-combinations"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78?auto=format&fit=crop&w=1200&q=85"
+description: "T-shirt and sneaker combinations are easier when colour, silhouette and outfit purpose are considered together."---
 
 # How to Match T-Shirts with Sneakers
 

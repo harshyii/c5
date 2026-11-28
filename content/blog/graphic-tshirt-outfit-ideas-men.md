@@ -2,7 +2,9 @@
 title: "Graphic T-Shirt Outfit Ideas for Men"
 slug: "graphic-tshirt-outfit-ideas-men"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85"
+description: "Graphic tees can anchor an outfit. The print size, placement, colour and fit determine how the artwork works with other pieces."---
 
 # Graphic T-Shirt Outfit Ideas for Men
 

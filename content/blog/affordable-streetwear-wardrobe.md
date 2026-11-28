@@ -2,7 +2,9 @@
 title: "How to Build an Affordable Streetwear Wardrobe"
 slug: "affordable-streetwear-wardrobe"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85"
+description: "A budget wardrobe should prioritize versatile garments, dependable fit and careful purchasing—not simply the lowest price."---
 
 # How to Build an Affordable Streetwear Wardrobe
 

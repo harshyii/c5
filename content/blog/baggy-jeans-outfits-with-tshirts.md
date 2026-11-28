@@ -2,7 +2,9 @@
 title: "How to Wear Baggy Jeans with T-Shirts"
 slug: "baggy-jeans-outfits-with-tshirts"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85"
+description: "Baggy denim and T-shirts work when the width, length and visual weight of each piece are coordinated."---
 
 # How to Wear Baggy Jeans with T-Shirts
 

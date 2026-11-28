@@ -2,7 +2,9 @@
 title: "Cargo Pants and Oversized T-Shirts: Outfit Guide"
 slug: "cargo-pants-oversized-tshirt-outfits"
 category: "Men’s Streetwear & T-Shirts"
----
+
+featured_image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1200&q=85"
+description: "Cargo trousers combine utility details with relaxed silhouettes. Pairing them with an oversized tee requires attention to pocket volume, leg width and overall proportion."---
 
 # Cargo Pants and Oversized T-Shirts: Outfit Guide
 
